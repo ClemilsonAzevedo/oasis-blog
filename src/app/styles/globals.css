@@ -17,6 +17,16 @@ body {
   background: var(--white);
 }
 
+@layer base{
+  #home{
+  background-image: url('../../assets/HomeBackgroundImage.svg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  }
+}
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

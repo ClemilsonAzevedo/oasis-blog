@@ -66,7 +66,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_100vh_auto] w-full relative`}
+        className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] w-full`}
       >
         <AppHeader />
         {children}
