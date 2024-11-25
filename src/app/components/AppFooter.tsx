@@ -1,9 +1,3 @@
 export function AppFooter() {
-
-  return(
-
-    <footer>
-      Footer
-    </footer>
-  )
+  return <footer>Footer</footer>
 }
