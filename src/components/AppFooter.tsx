@@ -1,10 +1,12 @@
-import MailBox from '@/assets/MailBox.png'
-import OasisLogo from '@/assets/OasisLogo.svg'
-import { InstagramIcon } from '@/assets/icons/InstagramIcon'
-import { LinkedinIcon } from '@/assets/icons/LinkedinIcon'
-import { TwitterIcon } from '@/assets/icons/TwitterIcon'
 import Image from 'next/image'
+
 import { AppButton } from './AppButton'
+
+import MailBox from '@/app/assets/MailBox.png'
+import OasisLogo from '@/app/assets/OasisLogo.svg'
+import { InstagramIcon } from '@/app/assets/icons/InstagramIcon'
+import { LinkedinIcon } from '@/app/assets/icons/LinkedinIcon'
+import { TwitterIcon } from '@/app/assets/icons/TwitterIcon'
 
 export function AppFooter() {
   return (

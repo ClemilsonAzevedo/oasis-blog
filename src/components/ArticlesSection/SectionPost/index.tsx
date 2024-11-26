@@ -1,4 +1,4 @@
-import anyBookSearchedInPexels from '@/images/algumLivroDoPexels.jpg'
+import anyBookSearchedInPexels from '@/app/assets/algumLivroDoPexels.jpg'
 import type { StaticImageData } from 'next/image'
 import { PostImage } from './PostImage'
 import { PostTitle } from './PostTitle'

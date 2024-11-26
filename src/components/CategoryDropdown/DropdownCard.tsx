@@ -1,4 +1,4 @@
-import VueJsFramework from '@/assets/FrameworkVueJs.svg'
+import VueJsFramework from '@/app/assets/FrameworkVueJs.svg'
 import Image from 'next/image'
 
 export function DropdownCard() {

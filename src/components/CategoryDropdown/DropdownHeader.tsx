@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from '@/assets/icons/ChevronRight'
+import { ChevronRightIcon } from '@/app/assets/icons/ChevronRight'
 
 // type DropdownHeaderProps = {
 //   props: {

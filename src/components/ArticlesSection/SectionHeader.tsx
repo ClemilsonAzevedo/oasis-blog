@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from '@/assets/icons/ChevronRight'
+import { ChevronRightIcon } from '@/app/assets/icons/ChevronRight'
 import Link from 'next/link'
 
 export type SectionHeaderProps = {

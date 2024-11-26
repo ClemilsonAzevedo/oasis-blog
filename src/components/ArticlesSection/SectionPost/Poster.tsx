@@ -1,6 +1,5 @@
-import { ProfileImage } from '@/images/ProfileImage';
-import type { StaticImageData } from 'next/image';
-
+import { ProfileImage } from '@/app/assets/ProfileImage'
+import type { StaticImageData } from 'next/image'
 
 type PosterProps = {
   name: string
@@ -17,11 +16,11 @@ export function Poster({ post, name, imageUrl }: PosterProps) {
       <div className="flex flex-col gap-1">
         <span className="font-semibold">{name}</span>
         <p className="flex gap-2 items-center text-sm">
-        <time className="text-zinc-500 text-sm">
-              {new Date(post.createdDate).toLocaleDateString('pt-BR', {
-                dateStyle: 'medium',
-              })}
-            </time>
+          <time className="text-zinc-500 text-sm">
+            {new Date(post.createdDate).toLocaleDateString('pt-BR', {
+              dateStyle: 'medium',
+            })}
+          </time>
           <span>∙</span>
           <span>3 Min</span>
         </p>

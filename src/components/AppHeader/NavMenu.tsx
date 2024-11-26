@@ -1,8 +1,8 @@
 'use client'
 
-import { CloseIcon } from '@/assets/icons/Close'
-import { MagnifyingGlassIcon } from '@/assets/icons/MagnifyingGlass'
-import { MenuIcon } from '@/assets/icons/Menu'
+import { CloseIcon } from '@/app/assets/icons/Close'
+import { MagnifyingGlassIcon } from '@/app/assets/icons/MagnifyingGlass'
+import { MenuIcon } from '@/app/assets/icons/Menu'
 import Link from 'next/link'
 import { useState } from 'react'
 

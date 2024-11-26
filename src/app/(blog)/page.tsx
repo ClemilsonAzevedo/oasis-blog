@@ -1,10 +1,10 @@
-import HomeSideImage from '@/assets/HomeSideImage.svg'
-import { ChevronDownIcon } from '@/assets/icons/ChevronDown'
-import AnyBookImage from '@/images/algumLivroDoPexels.jpg'
+import HomeSideImage from '@/app/assets/HomeSideImage.svg'
+import AnyBookImage from '@/app/assets/algumLivroDoPexels.jpg'
+import { ChevronDownIcon } from '@/app/assets/icons/ChevronDown'
+import { AppButton } from '@/components/AppButton'
+import { ArticlesSection } from '@/components/ArticlesSection'
+import { CategoryDropdown } from '@/components/CategoryDropdown'
 import Image from 'next/image'
-import { AppButton } from './components/AppButton'
-import { ArticlesSection } from './components/ArticlesSection'
-import { CategoryDropdown } from './components/CategoryDropdown'
 
 const fakePosts = [
   {

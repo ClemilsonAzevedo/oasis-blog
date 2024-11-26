@@ -1,4 +1,4 @@
-import OasisLogo from '@/assets/OasisLogo.svg'
+import OasisLogo from '@/app/assets/OasisLogo.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 import { NavMenu } from './NavMenu'

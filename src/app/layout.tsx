@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 // eslint-disable-next-line camelcase
 import { Plus_Jakarta_Sans } from 'next/font/google'
-import { AppFooter } from './components/AppFooter'
-import { AppHeader } from './components/AppHeader'
-import './styles/globals.css'
+
+import { AppFooter } from '@/components/AppFooter'
+import { AppHeader } from '@/components/AppHeader'
+import './globals.css'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -66,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] max-w-[1440px]`}
+        className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] max-w-[1440px] selection:bg-blogYellow/30`}
       >
         <AppHeader />
         {children}

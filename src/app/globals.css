@@ -12,20 +12,19 @@
   --yellow: #FFC344;
 }
 
-body {
-  color: var(--black);
-  background: var(--white);
-}
-
 @layer base{
+  body {
+    color: var(--black);
+    background: var(--white);
+  }
   #home{
-  background-image: url('../../assets/HomeBackgroundImage.svg');
+  background-image: url('./assets/HomeBackgroundImage.svg');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat;
 }
 #homeCategory{
-  background-image: url('../../assets/HomeCategoryBackgroundImage.svg');
+  background-image: url('./assets/HomeCategoryBackgroundImage.svg');
   background-position: bottom right; 
   background-repeat: no-repeat;
   width: 100%;
