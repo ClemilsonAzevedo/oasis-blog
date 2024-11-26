@@ -10,7 +10,7 @@ export function ArticlesSection({
   post,
 }: ArticlesSectionProps) {
   return (
-    <article className="px-24 py-20">
+    <article>
       <SectionHeader
         headerProps={{
           sectionTitle,

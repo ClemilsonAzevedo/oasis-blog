@@ -91,34 +91,41 @@ export default function Home() {
       <CategoryDropdown />
 
       {/* articles Zone */}
-      <ArticlesSection
-        headerProps={{
-          sectionTitle: 'Artigos em Destaque',
-          sectionRedirectLink: '/articles',
-        }}
-        post={fakePosts}
-      />
-      <ArticlesSection
-        headerProps={{
-          sectionTitle: 'CSS',
-          sectionRedirectLink: '/articles',
-        }}
-        post={fakePosts}
-      />
-      <ArticlesSection
-        headerProps={{
-          sectionTitle: 'Javascript',
-          sectionRedirectLink: '/articles',
-        }}
-        post={fakePosts}
-      />
-      <ArticlesSection
-        headerProps={{
-          sectionTitle: 'React JS',
-          sectionRedirectLink: '/articles',
-        }}
-        post={fakePosts}
-      />
+      <div className="flex flex-col gap-20 w-full max-w-full px-12 py-10">
+        <ArticlesSection
+          headerProps={{
+            sectionTitle: 'Artigos em Destaque',
+            sectionRedirectLink: '/articles',
+          }}
+          post={fakePosts}
+        />
+
+        <ArticlesSection
+          headerProps={{
+            sectionTitle: 'CSS',
+            sectionRedirectLink: '/articles',
+          }}
+          post={fakePosts}
+        />
+
+        <ArticlesSection
+          headerProps={{
+            sectionTitle: 'Javascript',
+            sectionRedirectLink: '/articles',
+          }}
+          post={fakePosts}
+        />
+
+        <ArticlesSection
+          headerProps={{
+            sectionTitle: 'React JS',
+            sectionRedirectLink: '/articles',
+          }}
+          post={fakePosts}
+        />
+
+        <AppButton className="px-6 mx-auto w-[166px]">Mais Artigos</AppButton>
+      </div>
 
       {/* Category Zone
       <CategoryDropdown /> */}
