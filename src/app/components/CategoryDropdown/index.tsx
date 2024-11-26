@@ -5,7 +5,7 @@ export function CategoryDropdown() {
   return (
     <div
       id="homeCategory"
-      className="bg-blogLightGray100 p-16 flex flex-col justify-center w-full gap-12 relative -z-0"
+      className="p-16 flex flex-col justify-center w-full gap-12 bg-blogLightGray100"
     >
       <DropdownHeader
         props={{

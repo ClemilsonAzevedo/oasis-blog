@@ -26,9 +26,9 @@ body {
 }
 #homeCategory{
   background-image: url('../../assets/HomeCategoryBackgroundImage.svg');
-  background-position:  right bottom; 
+  background-position: bottom right; 
   background-repeat: no-repeat;
-  max-width: 1120px;
+  width: 100%;
   }
 }
 
