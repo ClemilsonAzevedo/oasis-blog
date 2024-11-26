@@ -14,7 +14,7 @@ export function NavMenu() {
   return (
     <nav
       aria-label="Navegação principal"
-      className="relative text-xl font-bold pr-4"
+      className="relative text-xl font-bold pr-4 z-50"
     >
       {/* Desktop Menu */}
       <ul className="hidden md:flex items-center gap-12">

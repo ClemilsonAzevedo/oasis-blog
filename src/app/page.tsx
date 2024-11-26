@@ -9,7 +9,7 @@ export default function Home() {
     <section>
       <div
         id="home"
-        className="h-screen flex flex-col justify-center md:justify-center md:flex-row items-center gap-4 bg-blogLightGray100 relative -z-10 p-5"
+        className="h-screen flex flex-col justify-center md:justify-center md:flex-row items-center gap-4 bg-blogLightGray100 relative -z-0 p-5"
       >
         <div className="flex flex-col-reverse items-center justify-center md:justify-around w-full lg:flex-row gap-5">
           <div className="gap-[30px] flex flex-col justify-center md:items-start items-center max-w-[664px]">

@@ -5,7 +5,7 @@ import { NavMenu } from './NavMenu'
 
 export function AppHeader() {
   return (
-    <header className="flex items-center justify-between gap-2 h-full bg-blogLightGray100 px-6 md:px-12 lg:px-24 w-full sticky top-0 shadow">
+    <header className="flex items-center justify-between gap-2 h-full bg-blogLightGray100 px-6 md:px-12 lg:px-24 w-full sticky z-50 top-0 shadow">
       {/* Logo Link to redirect Home */}
       <Link href="/">
         <Image
