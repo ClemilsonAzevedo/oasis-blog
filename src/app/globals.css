@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&family=Source+Serif+Pro:wght@400;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,6 +8,8 @@
   --white: #FFFFFE;
   --light-gray-100: #EFF0F3;
   --light-gray-200: #E4E5E9;
+  --secondary-50: #F6F6F7;
+  --secondary-100: #E8E8EA;
   --gray: #C0C0C0;
   --dark-gray: #9A9494;
   --black: #2B2C34;

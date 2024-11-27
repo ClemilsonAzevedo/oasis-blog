@@ -38,20 +38,10 @@ export const metadata: Metadata = {
     title: 'Oasis Blog | Tudo sobre Desenvolvimento Web',
     description:
       'Explore insights valiosos sobre Next.js, React e otimização de aplicativos modernos.',
-    url: 'https://www.oasisblog.com',
     type: 'website',
     locale: 'pt_BR',
-    images: [
-      {
-        url: 'https://www.oasisblog.com/imagem-og.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Oasis Blog - Desenvolvimento Web',
-      },
-    ],
   },
   twitter: {
-    card: 'summary_large_image',
     site: '@OasisBlog',
     title: 'Oasis Blog | Desenvolvimento Web',
     description:

@@ -5,6 +5,20 @@ import type { MDXComponents } from 'mdx/types'
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
+    h1: ({ children }) => (
+      <h1 style={{ fontFamily: 'Work Sans, sans-serif' }}>{children}</h1>
+    ),
+    h2: ({ children }) => (
+      <h2 style={{ fontFamily: 'Work Sans, sans-serif' }}>{children}</h2>
+    ),
+    h3: ({ children }) => (
+      <h3 style={{ fontFamily: 'Work Sans, sans-serif' }}>{children}</h3>
+    ),
+    p: ({ children }) => (
+      <p style={{ fontFamily: 'Source Serif Pro, serif', fontSize: '20px' }}>
+        {children}
+      </p>
+    ),
     table: (props) => (
       <div className="border border-blogGray rounded-lg">
         <table {...props} className="m-0" />
