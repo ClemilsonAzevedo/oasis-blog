@@ -25,7 +25,10 @@ export function SectionPost({
   poster,
 }: PostProps) {
   return (
-    <Link href={`/${slug}`}>
+    <Link
+      href={`/${slug}`}
+      className="transform transition duration-300 ease-in-out opacity-0 translate-y-5 animate-fadeIn"
+    >
       <div className="flex flex-col items-start justify-between p-5 m-px w-[300px] h-[425px] hover:shadow rounded-xl focus:shadow-md">
         <div className="flex flex-col items-start gap-6">
           <PostImage postImageUrl={postImageUrl ?? anyBookSearchedInPexels} />

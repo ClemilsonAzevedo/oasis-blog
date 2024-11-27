@@ -62,6 +62,18 @@ export const fakeCategories: dropdownCardProps[] = [
   },
   {
     categoryImageUrl: VueJsFramework,
+    category: 'clema',
+  },
+  {
+    categoryImageUrl: VueJsFramework,
+    category: 'clemilson',
+  },
+  {
+    categoryImageUrl: VueJsFramework,
+    category: 'rust',
+  },
+  {
+    categoryImageUrl: VueJsFramework,
     category: 'Esportes',
   },
   {
@@ -102,7 +114,7 @@ export default async function Blog() {
             src={HomeSideImage}
             alt="User Preview WebSites in hand"
             quality={100}
-            className="lg:w-full w-1/2 max-w-[470px] max-h-[387px]"
+            className="lg:w-full w-1/2 max-w-[470px] max-h-[387px] transform transition duration-300 ease-in-out opacity-0 translate-y-5 animate-fadeIn"
           />
         </div>
         <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 cursor-pointer">
