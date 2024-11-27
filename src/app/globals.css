@@ -16,11 +16,12 @@
   --yellow: #FFC344;
 }
 
+body {
+  color: var(--black);
+  background: var(--white);
+}
+
 @layer base{
-  body {
-    color: var(--black);
-    background: var(--white);
-  }
   #home{
   background-image: url('./assets/HomeBackgroundImage.svg');
   background-size: cover; 

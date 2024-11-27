@@ -1,11 +1,23 @@
-import VueJsFramework from '@/app/assets/FrameworkVueJs.svg'
-import Image from 'next/image'
+import Image, { type StaticImageData } from 'next/image'
+import Link from 'next/link'
 
-export function DropdownCard() {
+import NoImage from '@/app/assets/SemImagem.png'
+
+export type dropdownCardProps = {
+  category: string
+  categoryImageUrl: string | StaticImageData
+}
+
+export function DropdownCard({
+  categoryImageUrl,
+  category,
+}: dropdownCardProps) {
   return (
-    <div className="w-[220px] h-[280px] flex items-start justify-start bg-blogWhite flex-col gap-7 pt-16 px-7 rounded-lg shadow hover:bg-blogYellow transition">
-      <Image src={VueJsFramework} alt="Framework VueJs" quality={100} />
-      <span>Vue JS</span>
-    </div>
+    <Link href={`/categories?category=${category}`}>
+      <div className="w-[220px] h-[280px] flex items-start justify-start bg-blogWhite flex-col gap-7 pt-16 px-7 rounded-lg shadow hover:bg-blogYellow transition">
+        <Image src={categoryImageUrl ?? NoImage} alt={category} quality={100} />
+        <span>{category}</span>
+      </div>
+    </Link>
   )
 }

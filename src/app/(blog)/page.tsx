@@ -1,68 +1,73 @@
+import VueJsFramework from '@/app/assets/FrameworkVueJs.svg'
 import HomeSideImage from '@/app/assets/HomeSideImage.svg'
-import AnyBookImage from '@/app/assets/algumLivroDoPexels.jpg'
 import { ChevronDownIcon } from '@/app/assets/icons/ChevronDown'
 import { AppButton } from '@/components/AppButton'
 import { ArticlesSection } from '@/components/ArticlesSection'
-import type { PostProps } from '@/components/ArticlesSection/SectionPost'
 import { CategoryDropdown } from '@/components/CategoryDropdown'
+import type { dropdownCardProps } from '@/components/CategoryDropdown/DropdownCard'
+import { getPosts } from '@/lib/posts'
 import Image from 'next/image'
-import { readdir } from 'node:fs/promises'
 
-const fakePosts: PostProps[] = [
+// const fakePosts: PostProps[] = [
+//   {
+//     postImageUrl: AnyBookImage,
+//     category: 'tecnologia',
+//     postTitle: 'Explorando o Futuro da Inteligência Artificial',
+//     publishDate: new Date('2024-11-20T14:35:00'),
+//     poster: {
+//       name: 'Clemilson Azevedo',
+//       imageUrl: 'https://github.com/clemilsonazevedo.png',
+//     },
+//   },
+//   {
+//     postImageUrl: AnyBookImage,
+//     category: 'tecnologia',
+//     postTitle: 'Como Desenvolver Aplicativos Mobile com React Native',
+//     publishDate: new Date('2024-11-18T09:15:00'),
+//     poster: {
+//       name: 'Clemilson Azevedo',
+//       imageUrl: 'https://github.com/clemilsonazevedo.png',
+//     },
+//   },
+//   {
+//     postImageUrl: AnyBookImage,
+//     category: 'tecnologia',
+//     postTitle: 'Design Patterns no Desenvolvimento Frontend',
+//     publishDate: new Date('2024-11-22T16:45:00'),
+//     poster: {
+//       name: 'Clemilson Azevedo',
+//       imageUrl: 'https://github.com/clemilsonazevedo.png',
+//     },
+//   },
+//   {
+//     postImageUrl: AnyBookImage,
+//     category: 'tecnologia',
+//     postTitle: 'Melhores Práticas para API REST',
+//     publishDate: new Date('2024-11-15T12:30:00'),
+//     poster: {
+//       name: 'Clemilson Azevedo',
+//       imageUrl: 'https://github.com/clemilsonazevedo.png',
+//     },
+//   },
+// ]
+export const fakeCategories: dropdownCardProps[] = [
   {
-    postImageUrl: AnyBookImage,
-    postTitle: 'Explorando o Futuro da Inteligência Artificial',
-    publishDate: new Date('2024-11-20T14:35:00'),
-    poster: {
-      name: 'Clemilson Azevedo',
-      imageUrl: 'https://github.com/clemilsonazevedo.png',
-    },
+    categoryImageUrl: VueJsFramework,
+    category: 'Tecnologia',
   },
   {
-    postImageUrl: AnyBookImage,
-    postTitle: 'Como Desenvolver Aplicativos Mobile com React Native',
-    publishDate: new Date('2024-11-18T09:15:00'),
-    poster: {
-      name: 'Clemilson Azevedo',
-      imageUrl: 'https://github.com/clemilsonazevedo.png',
-    },
+    categoryImageUrl: VueJsFramework,
+    category: 'Moda',
   },
   {
-    postImageUrl: AnyBookImage,
-    postTitle: 'Design Patterns no Desenvolvimento Frontend',
-    publishDate: new Date('2024-11-22T16:45:00'),
-    poster: {
-      name: 'Clemilson Azevedo',
-      imageUrl: 'https://github.com/clemilsonazevedo.png',
-    },
+    categoryImageUrl: VueJsFramework,
+    category: 'Esportes',
   },
   {
-    postImageUrl: AnyBookImage,
-    postTitle: 'Melhores Práticas para API REST',
-    publishDate: new Date('2024-11-15T12:30:00'),
-    poster: {
-      name: 'Clemilson Azevedo',
-      imageUrl: 'https://github.com/clemilsonazevedo.png',
-    },
+    categoryImageUrl: VueJsFramework,
+    category: 'Gastronomia',
   },
 ]
-
-async function getPosts(): Promise<PostProps[]> {
-  const slugs = (
-    await readdir('./src/app/(blog)/(posts)', { withFileTypes: true })
-  ).filter((dirent) => dirent.isDirectory())
-
-  const posts = await Promise.all(
-    slugs.map(async ({ name }) => {
-      const { metadata } = await import(`@/app/(blog)/(posts)/${name}/page.mdx`)
-      return { slug: name, ...metadata }
-    }),
-  )
-
-  posts.sort((a, b) => +new Date(b.publishDate) - +new Date(a.publishDate))
-
-  return posts
-}
 
 export default async function Blog() {
   const posts = await getPosts()
@@ -109,7 +114,7 @@ export default async function Blog() {
       </div>
 
       {/* Category Zone */}
-      <CategoryDropdown />
+      <CategoryDropdown cards={fakeCategories} />
 
       {/* articles Zone */}
       <div className="flex flex-col gap-20 w-full max-w-full px-12 py-10">
@@ -121,7 +126,7 @@ export default async function Blog() {
           post={posts}
         />
 
-        <ArticlesSection
+        {/* <ArticlesSection
           headerProps={{
             sectionTitle: 'CSS',
             sectionRedirectLink: '/articles',
@@ -143,7 +148,7 @@ export default async function Blog() {
             sectionRedirectLink: '/articles',
           }}
           post={fakePosts}
-        />
+        /> */}
 
         <AppButton className="px-6 mx-auto w-[166px]">Mais Artigos</AppButton>
       </div>

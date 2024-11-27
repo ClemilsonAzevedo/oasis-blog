@@ -9,6 +9,7 @@ export type PostProps = {
   postImageUrl: StaticImageData | string
   postTitle: string
   slug?: string
+  category?: string
   publishDate: Date
   poster: {
     name: string

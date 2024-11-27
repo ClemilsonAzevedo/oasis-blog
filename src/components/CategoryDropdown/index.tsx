@@ -1,7 +1,11 @@
-import { DropdownCard } from './DropdownCard'
+import { DropdownCard, type dropdownCardProps } from './DropdownCard'
 import { DropdownHeader } from './DropdownHeader'
 
-export function CategoryDropdown() {
+type CategoryDropdownProps = {
+  cards: dropdownCardProps[]
+}
+
+export function CategoryDropdown({ cards }: CategoryDropdownProps) {
   return (
     <div
       id="homeCategory"
@@ -9,11 +13,13 @@ export function CategoryDropdown() {
     >
       <DropdownHeader />
       <div className="flex flex-col md:flex-row items-center justify-center gap-9">
-        <DropdownCard />
-        <DropdownCard />
-        <DropdownCard />
-        <DropdownCard />
-        <DropdownCard />
+        {cards.map((card) => (
+          <DropdownCard
+            key={card.category}
+            category={card.category}
+            categoryImageUrl={card.categoryImageUrl}
+          />
+        ))}
       </div>
     </div>
   )
