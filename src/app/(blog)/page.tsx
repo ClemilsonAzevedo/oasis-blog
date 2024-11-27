@@ -3,14 +3,16 @@ import AnyBookImage from '@/app/assets/algumLivroDoPexels.jpg'
 import { ChevronDownIcon } from '@/app/assets/icons/ChevronDown'
 import { AppButton } from '@/components/AppButton'
 import { ArticlesSection } from '@/components/ArticlesSection'
+import type { PostProps } from '@/components/ArticlesSection/SectionPost'
 import { CategoryDropdown } from '@/components/CategoryDropdown'
 import Image from 'next/image'
+import { readdir } from 'node:fs/promises'
 
-const fakePosts = [
+const fakePosts: PostProps[] = [
   {
     postImageUrl: AnyBookImage,
     postTitle: 'Explorando o Futuro da Inteligência Artificial',
-    createdAt: new Date('2024-11-20T14:35:00'),
+    publishDate: new Date('2024-11-20T14:35:00'),
     poster: {
       name: 'Clemilson Azevedo',
       imageUrl: 'https://github.com/clemilsonazevedo.png',
@@ -19,7 +21,7 @@ const fakePosts = [
   {
     postImageUrl: AnyBookImage,
     postTitle: 'Como Desenvolver Aplicativos Mobile com React Native',
-    createdAt: new Date('2024-11-18T09:15:00'),
+    publishDate: new Date('2024-11-18T09:15:00'),
     poster: {
       name: 'Clemilson Azevedo',
       imageUrl: 'https://github.com/clemilsonazevedo.png',
@@ -28,7 +30,7 @@ const fakePosts = [
   {
     postImageUrl: AnyBookImage,
     postTitle: 'Design Patterns no Desenvolvimento Frontend',
-    createdAt: new Date('2024-11-22T16:45:00'),
+    publishDate: new Date('2024-11-22T16:45:00'),
     poster: {
       name: 'Clemilson Azevedo',
       imageUrl: 'https://github.com/clemilsonazevedo.png',
@@ -37,7 +39,7 @@ const fakePosts = [
   {
     postImageUrl: AnyBookImage,
     postTitle: 'Melhores Práticas para API REST',
-    createdAt: new Date('2024-11-15T12:30:00'),
+    publishDate: new Date('2024-11-15T12:30:00'),
     poster: {
       name: 'Clemilson Azevedo',
       imageUrl: 'https://github.com/clemilsonazevedo.png',
@@ -45,7 +47,26 @@ const fakePosts = [
   },
 ]
 
-export default function Home() {
+async function getPosts(): Promise<PostProps[]> {
+  const slugs = (
+    await readdir('./src/app/(blog)/(posts)', { withFileTypes: true })
+  ).filter((dirent) => dirent.isDirectory())
+
+  const posts = await Promise.all(
+    slugs.map(async ({ name }) => {
+      const { metadata } = await import(`@/app/(blog)/(posts)/${name}/page.mdx`)
+      return { slug: name, ...metadata }
+    }),
+  )
+
+  posts.sort((a, b) => +new Date(b.publishDate) - +new Date(a.publishDate))
+
+  return posts
+}
+
+export default async function Blog() {
+  const posts = await getPosts()
+
   return (
     <section className="flex flex-col w-full">
       <div
@@ -97,7 +118,7 @@ export default function Home() {
             sectionTitle: 'Artigos em Destaque',
             sectionRedirectLink: '/articles',
           }}
-          post={fakePosts}
+          post={posts}
         />
 
         <ArticlesSection

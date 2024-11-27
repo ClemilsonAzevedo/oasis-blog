@@ -5,7 +5,7 @@ type PosterProps = {
   name: string
   imageUrl: string | StaticImageData
   post: {
-    createdDate: string | Date
+    publishDate: string | Date
   }
 }
 
@@ -17,7 +17,7 @@ export function Poster({ post, name, imageUrl }: PosterProps) {
         <span className="font-semibold">{name}</span>
         <p className="flex gap-2 items-center text-sm">
           <time className="text-zinc-500 text-sm">
-            {new Date(post.createdDate).toLocaleDateString('pt-BR', {
+            {new Date(post.publishDate).toLocaleDateString('pt-BR', {
               dateStyle: 'medium',
             })}
           </time>

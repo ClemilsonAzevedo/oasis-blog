@@ -18,12 +18,13 @@ export function ArticlesSection({
         }}
       />
       <div className="flex flex-col md:flex-row md:justify-start items-center justify-center gap-9">
-        {post.map((post) => (
+        {post?.map((post) => (
           <SectionPost
             key={post.postTitle}
+            slug={post.slug}
             postImageUrl={post.postImageUrl}
             postTitle={post.postTitle}
-            createdAt={post.createdAt}
+            publishDate={post.publishDate}
             poster={post.poster}
           />
         ))}
