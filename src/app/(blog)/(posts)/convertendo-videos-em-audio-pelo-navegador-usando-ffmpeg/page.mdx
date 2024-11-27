@@ -1,188 +1,136 @@
----
-title: Convertendo vídeos em áudio pelo navegador usando FFmpeg e WebAssembly (WASM)
-description: Nesse artigo, mostro como aproveitamos o poder do WebAssembly para manipular vídeos antes de envia-los ao back-end da aplicação.
-publishDate: 2024-07-24T11:00:00Z
----
+## Função de mais alto nível no Rust
 
-import Image from 'next/image'
-import audioConversionScreenshot from './audio-conversion-progress-screenshot.jpg'
+No rust nós temos uma função que está no top level, é onde todo o projecto executa, é de lá que parte o projecto.
 
-<div className="space-y-4">
-  <div className="flex items-center gap-1 not-prose text-zinc-500 text-sm">
-    <time>
-      Publicado em {new Date("2024-07-24T11:00:00Z").toLocaleDateString('pt-BR', {
-        dateStyle: 'medium',
-      })}
-    </time>
-  </div>
-  # Convertendo vídeos em áudio pelo navegador usando FFmpeg e WebAssembly (WASM) 
-</div>
-
-## Conteúdo
-
-## O problema
-
-O Nivo foi criado inicialmente como uma ferramenta para gerar **transcrições de vídeo-aulas** e, a partir dessas transcrições, automatizar o processo de criar títulos, descrições e outros materiais usando **inteligência artificial**.
-
-Um dos primeiros desafios foi lidar com a **conversão de vídeos em áudio**, já que muitas APIs disponíveis para transcrição suportavam apenas arquivos de áudio. Além disso, arquivos de áudio são geralmente 90-95% mais leves que arquivos de vídeo, sendo uma opção mais eficiente.
-
-### FFmpeg
-
-A primeira ideia foi utilizar o [FFmpeg](https://www.ffmpeg.org/), um projeto open-source que permite manipular arquivos de áudio e vídeo.
-
-Integrado ao Node.js, podemos realizar download, conversão e upload utilizando [streams](https://nodejs.org/api/stream.html). Enquanto fazemos o download de um MP4, podemos convertê-lo para MP3 e, conforme a conversão é feita, fazer o upload do áudio para o serviço de armazenamento.
-
-## Solução 1: AWS Lambda + FFmpeg
-
-A primeira opção foi usar **FFmpeg** hospedado em uma função serverless (AWS Lambda), que recebia a URL do vídeo e salvava o áudio no storage.
-
-Funções serverless (ou lambdas, como são chamadas na AWS) são códigos que executam sob demanda em ambientes altamente isolados e com recursos limitados.
-
-Sempre que precisamos converter um vídeo, chamamos a URL da função, instanciando um container que realiza a conversão e, assim que possível, deixa de existir.
-
-Essa solução tem funcionado bem até hoje. No entanto, ela gera custos que poderiam ser evitados caso fosse possível (*spoiler: é possível*) realizar a conversão no client-side (navegador).
-
-Embora atualmente utilizemos **WebAssembly** para a conversão de vídeo em áudio, a solução de conversão via serverless ainda é funcional e usada quando os uploads são feitos via API.
-
-*Se você tiver interesse no código dessa função, me contate no [Twitter](https://x.com/dieegosf)!*
-
-## Solução 2: WebAssembly + FFmpeg
-
-A segunda solução foi usar o projeto [ffmpeg.wasm](https://ffmpegwasm.netlify.app/), que permite executar o FFmpeg diretamente no navegador do usuário via WebAssembly, realizando a conversão do vídeo sem utilizar recursos do nosso servidor.
-
-Essa opção funcionou brilhantemente, e agora cada upload de vídeo na plataforma inclui uma etapa automática de conversão para áudio.
-
-<Image className="rounded-lg" src={audioConversionScreenshot} alt="Captura de tela da plataforma Nivo que destaca a barra de progresso de conversão de vídeo em áudio" width={768} height={290} />
-
-Depois de convertido, o áudio é enviado para o Cloudflare R2 e utilizado posteriormente para a transcrição do vídeo.
-
-Agora, vamos ver como ficou o código dessa solução.
-
-### Instalação das dependências
-
-Para utilizar o ffmpeg.wasm, precisamos instalar as seguintes dependências:
-
-```sh
-npm i @ffmpeg/ffmpeg @ffmpeg/util
+E ela é declarada dessa forma.
+```rust
+	fn main (){}
 ```
 
-*No momento desse post, estou utilizando a versão 0.12.x.*
+Dentro dessa função é onde todo o bloco de código é executado.
 
-### Setup do ffmpeg.wasm
+Podemos fazer coisas simples como imprimir um **Hello World** na tela ou fazer outras funções, no primeiro caso que é imprimir um **Hello World** na tela, basta passar o comando println! para que o texto seja impresso no terminal.
 
-Primeiro, inicializamos o **ffmpeg.wasm** e usamos uma variável global para evitar recarregar a biblioteca a cada nova conversão.
+```rust
+	fn main (){
+		println!("Hello World");
+	}
+```
+Esse comando fará com que o o Hello World seja impresso na tela.
 
-```ts
-import { FFmpeg } from '@ffmpeg/ffmpeg'
-import { fetchFile, toBlobURL } from '@ffmpeg/util'
+> [!info] println!
+> O ==!== do ==println!== é um indicativo de que ele é um macro, ou seja é uma função que é executada quando chamada passando os parametros necessários que no caso é uma string.
+> 
+> Para mostrar os valores de uma variável dentro de um println!, precisamos abrir e fechar chaves dentro de aspas duplar e após uma virgula da string adicionar a variável.
+> 
+> 
+```rust
+	//Exemplo de como usar valores no printls!
+	 fn main (){
+		let hello_world: String = String::new("Hello World")
+		println!("{}", hello_world);
 
-export let ffmpeg: FFmpeg | null = null
-
-export async function convertVideoToMP3(
-  inputFile: File,
-  onProgress: (progress: number) => void
-): Promise<File> {
-  ffmpeg = ffmpeg || new FFmpeg()
-
-  if (!ffmpeg.loaded) {
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
-
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-      wasmURL: await toBlobURL(
-        `${baseURL}/ffmpeg-core.wasm`,
-        'application/wasm'
-      ),
-    })
-  }
-
-  // Código para conversão (abaixo)
-}
+	//Caso seja um array precisa-se usar o {:?}
+		let lista_a = [i32; 5] = [1,2,3,4,5];
+		println!("{:?}", lista_a)
+	}
 ```
 
-Essa função recebe o arquivo de origem, representando o vídeo carregado pelo usuário, e permite monitorar o progresso da conversão com uma função enviada no segundo parâmetro.
+## Adicionar pacotes
 
-Usamos um CDN externo (unpkg) para carregar o FFmpeg, pois o arquivo WASM é pesado (3 MB), evitando o consumo de banda na nossa hospedagem.
+Assim como temos no NPM ou outro package manager o cargo também tem o seu comando para adicionar pacotes.
 
-### Conversão de MP4 em MP3
+> [!INFO] Cargo Add
+> Para adicionar os pacotes no Rust, nós usamos o cargo com o seguinte comando
+> ```bash
+> cargo add packageName
+> ```
+> Com isso nós podemos fazer um build para compilar a aplicação e a seguir rodar o projecto e teremos o pacote adicionado
+> ```bash
+> cargo build
+> cargo run
+> ```
 
-Agora que temos acesso ao arquivo de vídeo, vamos:
+ >[!important] Pacotes do Cargo
+> Podemos encontrar todos os pacotes disponíveis no cargo no site [Crates.io](https://crates.io/)
 
-1.	Utilizar a função `writeFile` para que o ffmpeg.wasm tenha acesso ao vídeo;
-2.	Atualizar a função de progresso para a função recebida no parâmetro;
-3.	Converter para MP3 (usamos um bitrate de 32k para criar um arquivo leve);
-4.	Converter o arquivo para uma instância da classe `File` do JavaScript e retorná-la;
+## Criar Variáveis no Rust
 
-```ts
-ffmpeg.writeFile(inputFile.name, await fetchFile(inputFile)) // [!code highlight]
+Para criar uma variável no Rust podemos usar o **let** e depois passar o tipo.
 
-const onFFmpegProgress = ({ progress }: { progress: number }) => {
-  const progressPercentage = Math.round(progress * 100)
+> [!INFO] Declarar variáveis
+> Vamos focar em declarar uma string que se inicializa vazia.
+> ```rust
+> 	let name: String = String::new();
+> ```
 
-  onProgress(progressPercentage)
-}
+>[!IMPORTANT] Regras de Declaração de variáveis
+>O padrão de declarar variáveis do Rust é Snake case ou seja toda separação de letras é por traço e é tudo em lower case.
+>
 
-ffmpeg.on('progress', onFFmpegProgress) // [!code highlight]
 
-const outputId = crypto.randomUUID()
+# Fundamentos do Rust
 
-await ffmpeg.exec([ // [!code highlight:10]
-  '-i',
-  inputFile.name,
-  '-vn',
-  '-b:a',
-  '32k',
-  '-acodec',
-  'libmp3lame',
-  `${outputId}.mp3`,
-])
+#### Como funciona a memória dentro do Rust?
 
-const data = (await ffmpeg.readFile(`${outputId}.mp3`)) as Uint8Array
+Existem duas **áreas de memória** para usar nas aplicações, são elas a ==Stack== e a ==Heap==
 
-const audioFileBlob = new Blob([data.buffer], { type: 'audio/mpeg' })
+##### Memória Stack
+>[!INFO] Stack
+>É uma pilha, que respeita a LIFO, ==(Last In First Out)== e dentro da LIFO nós temos a lógica da pilha de execução dentro da aplicação.
+>
+>Ou seja, todas as funções são executadas em ordem de pilha, uma após a outra, tudo em ordem.
+>```rust
+>fn main(){
+>	test_a();
+>}
+>
+>fn test_a(){
+>	test_b()
+>}
+>
+>>fn test_b(){
+>	!println("{}", 123)
+>}
+>```
+>
 
-const audioFile = new File([audioFileBlob], `${outputId}.mp3`, { // [!code highlight:3]
-  type: 'audio/mpeg',
-})
+>[!IMPORTANT] Stack
+>>É uma regra do rust. Todos os dados que têm tamanho fixo, será colocado dentro da stack, é a área preferencial por ser mais rápida e mais organizada.
 
-ffmpeg.off('progress', onFFmpegProgress)
 
-return audioFile // [!code highlight]
-```
+##### Memória Heap
+>[!INFO] Heap
+>É um aglomerado e é onde vão todos os dados que têm tamanhos variáveis.
+>
+>Ou seja, vai colocar dentro de uma area mais lenta e menos organizada.
 
-No momento da escrita deste artigo, o ffmpeg.wasm ainda tem suporte instável a múltiplas execuções simultâneas de comandos do FFmpeg, por isso, realizo a conversão de um vídeo por vez.
 
-### Upload do arquivo convertido
+>[!NOTE] Main() 
+>Todo o projecto em #programing/Rust Rust é iniciado a partir da função de mais alto nível que é a main() 
 
-Depois que o arquivo é convertido, realizo o upload diretamente para o Cloudflare R2 utilizando [URLs pré assinadas](https://docs.aws.amazon.com/pt_br/AmazonS3/latest/userguide/using-presigned-url.html) evitando enviar o arquivo para meu back-end para, só então, reenviá-lo para o storage.
-
-```ts
-await axios.put(uploadUrl, upload.audioFile, {
-  headers: { 'Content-Type': upload.audioFile.type },
-  onUploadProgress(progressEvent) {
-    const progress = progressEvent.progress
-      ? Math.round(progressEvent.progress * 100)
-      : 0
-
-    console.log('Progresso', progress)
-  }
-})
-```
-
-Para o upload, ainda utilizo o Axios, já que a Fetch API não possui suporte para monitorar o progresso do upload (XMLHttpRequest 💜).
-
-## Para o futuro...
-
-A possibilidade de utilizar o FFmpeg no navegador abriu portas para realizar diversas ações “pesadas” de conversão de vídeo e áudio no navegador, mas pode não ser a solução ideal para sempre.
-
-O ffmpeg.wasm ainda tem muitas limitações e uma performance bem inferior (já que depende dos recursos da máquina do usuário) ao FFmpeg executado em um ambiente ideal, além de haver um limite de 2 GB nos arquivos manipulados.
-
-Abaixo você pode ver um benchmark de performance com 50 execuções comparando a execução da conversão em um ambiente isolado comparado ao processo no navegador:
-
-|  #  | FFmpeg | ffmpeg.wasm |
-| --- | ------ | ------------ |
-| Média | 5.2 sec | 128.8 sec |
-| Máximo | 5.3 sec | 130.7 sec |
-| Mínimo | 5.1 sec | 126.6 sec |
-
-Provavelmente, a longo prazo, o ideal será mover toda conversão de vídeos para a primeira solução via AWS Lambda e executar esse trabalho em background, mas com certeza a possibilidade de utilizar WebAssembly tornou o processo mais simples e menos custoso principalmente nesse início.
+>[!IMPORTANT]  Regras de Ownership
+>- Cada valor tem um DONO
+>- Só pode ter um DONO por vez
+>- Dono fora do escopo -> o valor será eliminado
+> ```rust
+> 	//Nesse caso a variavel nome é dona do seu valor string que no momento é Rust, lembrando que o valor é armazenado na memória Heap já que o valor da string é variavel.
+> 	
+> 	fun main () {
+> 		let nome: String = String::from("Rust");
+> 	}
+> ```
+> 
+> Quando vamos redeclarar uma variável, ela deixa de ser dona do seu valor e passa para a variável que chamou-a, ou seja, temos uma transferência de valor.
+> ```rust
+> 
+> 	fun main () {
+> 		let nome: String = String::from("Rust");
+> 		let novo_nome: String = nome;
+> 		
+> 		println!("Nome {}", nome)
+> 		//Nome ao ser chamado aqui no println! vai dar erro pois o nome perdeu o seu valor depois de ser passado para novo_nome
+> 	}
+> ```
+> 
+> Se por acaso precisarmos de redeclarar essa variável podemos usar o ```.clone()``` para pode clonar o valor da variável e poder usar normalmente após a redeclaração.
