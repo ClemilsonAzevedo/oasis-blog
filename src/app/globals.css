@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --white: #FFFFFE;
+  --light-gray-100: #EFF0F3;
+  --light-gray-200: #E4E5E9;
+  --gray: #C0C0C0;
+  --dark-gray: #9A9494;
+  --black: #2B2C34;
+  --yellow: #FFC344;
+}
+
+@layer base{
+  body {
+    color: var(--black);
+    background: var(--white);
+  }
+  #home{
+  background-image: url('./assets/HomeBackgroundImage.svg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+}
+#homeCategory{
+  background-image: url('./assets/HomeCategoryBackgroundImage.svg');
+  background-position: bottom right; 
+  background-repeat: no-repeat;
+  width: 100%;
+  }
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
