@@ -7,15 +7,26 @@ import Image from 'next/image'
 import blogImage from './blogImage.png'
 import travelMan from './travelMan.png'
 
-<div className="space-y-4">
-  <div className="flex items-center gap-1 not-prose text-zinc-500 text-sm">
-    <time>
-      Publicado em {new Date("2024-07-24T11:00:00Z").toLocaleDateString('pt-BR', {
-        dateStyle: 'medium',
-      })}
-    </time>
+<div className="space-y-5">
+  <div className='space-y-4'>
+    <div>
+      <span className='px-3 py-[6px] rounded-[6px] bg-blogYellow text-blogWhite text-sm font-medium leading-5'>Tecnologia</span>
+    </div>
+    # O impacto da tecnologia no local de trabalho como a tecnologia está mudando 
   </div>
-  # O impacto da tecnologia no local de trabalho como a tecnologia está mudando 
+  <div className="flex items-center gap-1 not-prose text-zinc-500 text-sm">
+    <div className='flex items-center gap-2'>
+      <Image src={'https://github.com/clemilsonazevedo.png'} width={28} height={28} className='rounded-full' />
+      <div className='flex items-center gap-6'>
+        ######  Tracey Wilson
+        <time style={{ fontFamily: 'Work Sans, sans-serif', fontSize: '14px' }}>
+          {new Date("2024-07-24T11:00:00Z").toLocaleDateString('pt-BR', {
+            dateStyle: 'medium',
+          })}
+        </time>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -60,4 +71,4 @@ Por fim, não se esqueça de capturar memórias de sua viagem. Seja por meio de 
 
 ## Conclusão:
 
-Viajar é uma forma de arte que requer uma mistura de planejamento, preparação e espontaneidade. Seguindo essas dicas e truques, você poderá aproveitar ao máximo sua viagem e criar memórias que durarão a vida toda. Então faça as malas, embarque na aventura e aproveite o passeio.
+Viajar é uma forma de arte que requer uma mistura de planejamento, preparação e espontaneidade. Seguindo essas dicas e truques, você poderá aproveitar ao máximo sua viagem e criar memórias que durarão a vida toda. Então faça as malas, embarque na aventura e aproveite o passeio.import Image from 'next/image'import Image from 'next/image'import Image from 'next/image'

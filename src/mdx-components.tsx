@@ -11,13 +11,26 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h2: ({ children }) => (
       <h2 style={{ fontFamily: 'Work Sans, sans-serif' }}>{children}</h2>
     ),
-    h3: ({ children }) => (
-      <h3 style={{ fontFamily: 'Work Sans, sans-serif' }}>{children}</h3>
+    h6: ({ children }) => (
+      <h6
+        style={{
+          fontFamily: 'Work Sans, sans-serif',
+          fontSize: '14px',
+          fontWeight: 500,
+        }}
+      >
+        {children}
+      </h6>
     ),
     p: ({ children }) => (
       <p style={{ fontFamily: 'Source Serif Pro, serif', fontSize: '20px' }}>
         {children}
       </p>
+    ),
+    span: ({ children }) => (
+      <span style={{ fontFamily: 'Work Sans, sans-serif', fontSize: '14px' }}>
+        {children}
+      </span>
     ),
     table: (props) => (
       <div className="border border-blogGray rounded-lg">
