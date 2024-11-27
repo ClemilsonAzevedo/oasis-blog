@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon } from '@/app/assets/icons/MagnifyingGlass'
 import { MenuIcon } from '@/app/assets/icons/Menu'
 import Link from 'next/link'
 import { useState } from 'react'
+import { MoveToBottomButton } from '../MoveToBottomButton'
 
 // todo:Refatorar Os Menus
 
@@ -24,8 +25,8 @@ export function NavMenu() {
           </Link>
         </li>
         <li>
-          <Link href="/categories" legacyBehavior>
-            Categorias
+          <Link href="#homeCategory" scroll={false} legacyBehavior>
+            <MoveToBottomButton>Categories</MoveToBottomButton>
           </Link>
         </li>
         <li className="flex items-center py-1 w-28">
@@ -75,9 +76,7 @@ export function NavMenu() {
               </Link>
             </li>
             <li>
-              <Link href="/categorias" legacyBehavior>
-                Categorias
-              </Link>
+              <MoveToBottomButton>Categories</MoveToBottomButton>
             </li>
             <li className="flex items-center py-1 w-full">
               <label htmlFor="search" className="mr-[10px]">

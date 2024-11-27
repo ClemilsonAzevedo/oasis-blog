@@ -1,11 +1,12 @@
 import VueJsFramework from '@/app/assets/FrameworkVueJs.svg'
 import HomeSideImage from '@/app/assets/HomeSideImage.svg'
-import { ChevronDownIcon } from '@/app/assets/icons/ChevronDown'
 import { AppButton } from '@/components/AppButton'
 import { ArticlesSection } from '@/components/ArticlesSection'
 import { CategoryDropdown } from '@/components/CategoryDropdown'
 import type { dropdownCardProps } from '@/components/CategoryDropdown/DropdownCard'
+import { MoveToBottomButton } from '@/components/MoveToBottomButton'
 import { getPosts } from '@/lib/posts'
+import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 
 // const fakePosts: PostProps[] = [
@@ -76,7 +77,7 @@ export default async function Blog() {
     <section className="flex flex-col w-full">
       <div
         id="home"
-        className="h-screen flex flex-col justify-center md:justify-center md:flex-row items-center gap-4 bg-blogLightGray100 relative -z-0 p-5"
+        className="h-[calc(100vh-86px)] flex flex-col justify-start py-5 md:justify-center md:flex-row items-center gap-4 bg-blogLightGray100 relative -z-0 px-5"
       >
         <div className="flex flex-col-reverse items-center justify-center md:justify-around w-full lg:flex-row gap-5">
           <div className="gap-[30px] flex flex-col justify-center md:items-start items-center max-w-[664px]">
@@ -104,13 +105,11 @@ export default async function Blog() {
             className="lg:w-full w-1/2 max-w-[470px] max-h-[387px]"
           />
         </div>
-
-        <button
-          type="button"
-          className="absolute left-1/2 bottom-10 md:bottom-5"
-        >
-          <ChevronDownIcon />
-        </button>
+        <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 cursor-pointer">
+          <MoveToBottomButton>
+            <ChevronDown />
+          </MoveToBottomButton>
+        </div>
       </div>
 
       {/* Category Zone */}
