@@ -3,6 +3,7 @@ import { AppButton } from '@/components/AppButton'
 import { ArticlesSection } from '@/components/ArticlesSection'
 import { CategoryDropdown } from '@/components/CategoryDropdown'
 import { MoveToBottomButton } from '@/components/MoveToBottomButton'
+import { NewsletterInput } from '@/components/NewsletterInput'
 import { getCategoryFromPosts, getPosts } from '@/lib/posts'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
@@ -40,14 +41,7 @@ export default async function Blog() {
               Neste blog compartilho dicas e truques, frameworks, projetos, etc.
               Certifique-se de inscrever-se para receber atualizações recentes.
             </p>
-            <div className="flex items-center justify-center gap-5 md:w-full">
-              <input
-                type="text"
-                placeholder="Digite seu e-mail aqui...."
-                className="py-5 px-6 leading-none bg-blogWhite rounded-lg md:text-xl placeholder:text-blogGray border border-blogGray md:flex-1"
-              />
-              <AppButton className="px-5">Inscrever-se</AppButton>
-            </div>
+            <NewsletterInput />
           </div>
           <Image
             src={HomeSideImage}
