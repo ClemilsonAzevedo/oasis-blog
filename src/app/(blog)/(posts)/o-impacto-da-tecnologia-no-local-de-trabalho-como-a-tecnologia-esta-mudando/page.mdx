@@ -1,5 +1,5 @@
 ---
-title: O impacto da tecnologia no local de trabalho como a tecnologia está mudando
+postTitle: O impacto da tecnologia no local de trabalho como a tecnologia está mudando
 category: "tecnologia"
 poster: {
   name: 'Clemilson Azevedo',
@@ -8,11 +8,23 @@ poster: {
 publishDate: 2024-09-20T11:00:00Z
 ---
 
+import { PostHeader } from '../../_components/PostHeader'
+
 import Image from 'next/image'
 import blogImage from './blogImage.png'
 import travelMan from './travelMan.png'
 
-<div className="space-y-5">
+<PostHeader
+  title="O impacto da tecnologia no local de trabalho como a tecnologia está mudando"
+  category="tecnologia"
+  publishDate="2024-09-20T11:00:00Z"
+  poster={{
+    name: 'Clemilson Azevedo',
+    imageUrl: 'https://github.com/clemilsonazevedo.png'
+  }}
+/>
+
+{/* <div className="space-y-5">
   <div className='space-y-4'>
     <div>
       <span className='px-3 py-[6px] rounded-[6px] bg-blogYellow text-blogWhite text-sm font-medium leading-5'>Tecnologia</span>
@@ -32,7 +44,7 @@ import travelMan from './travelMan.png'
       </div>
     </div>
   </div>
-</div>
+</div> */}
 
 
 <Image className="rounded-lg" src={blogImage} alt="Paisagem incluindo o mar e um palácio" width={800} height={462} />
