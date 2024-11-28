@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { MoveToBottomButton } from '../MoveToBottomButton'
 
-// todo:Refatorar Os Menus
+// todo:Fazer a pesquisa funcional
 
 export function NavMenu() {
   const [menuOpen, setMenuOpen] = useState(false)

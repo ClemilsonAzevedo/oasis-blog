@@ -6,90 +6,31 @@ import { MoveToBottomButton } from '@/components/MoveToBottomButton'
 import { getCategoryFromPosts, getPosts } from '@/lib/posts'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
-// const fakePosts: PostProps[] = [
-//   {
-//     postImageUrl: AnyBookImage,
-//     category: 'tecnologia',
-//     postTitle: 'Explorando o Futuro da Inteligência Artificial',
-//     publishDate: new Date('2024-11-20T14:35:00'),
-//     poster: {
-//       name: 'Clemilson Azevedo',
-//       imageUrl: 'https://github.com/clemilsonazevedo.png',
-//     },
-//   },
-//   {
-//     postImageUrl: AnyBookImage,
-//     category: 'tecnologia',
-//     postTitle: 'Como Desenvolver Aplicativos Mobile com React Native',
-//     publishDate: new Date('2024-11-18T09:15:00'),
-//     poster: {
-//       name: 'Clemilson Azevedo',
-//       imageUrl: 'https://github.com/clemilsonazevedo.png',
-//     },
-//   },
-//   {
-//     postImageUrl: AnyBookImage,
-//     category: 'tecnologia',
-//     postTitle: 'Design Patterns no Desenvolvimento Frontend',
-//     publishDate: new Date('2024-11-22T16:45:00'),
-//     poster: {
-//       name: 'Clemilson Azevedo',
-//       imageUrl: 'https://github.com/clemilsonazevedo.png',
-//     },
-//   },
-//   {
-//     postImageUrl: AnyBookImage,
-//     category: 'tecnologia',
-//     postTitle: 'Melhores Práticas para API REST',
-//     publishDate: new Date('2024-11-15T12:30:00'),
-//     poster: {
-//       name: 'Clemilson Azevedo',
-//       imageUrl: 'https://github.com/clemilsonazevedo.png',
-//     },
-//   },
-// ]
-// export const fakeCategories: dropdownCardProps[] = [
-//   {
-//     categoryImageUrl: VueJsFramework,
-//     category: 'Tecnologia',
-//   },
-//   {
-//     categoryImageUrl: VueJsFramework,
-//     category: 'Moda',
-//   },
-//   {
-//     categoryImageUrl: VueJsFramework,
-//     category: 'clema',
-//   },
-//   {
-//     categoryImageUrl: VueJsFramework,
-//     category: 'clemilson',
-//   },
-//   {
-//     categoryImageUrl: VueJsFramework,
-//     category: 'rust',
-//   },
-//   {
-//     categoryImageUrl: VueJsFramework,
-//     category: 'Esportes',
-//   },
-//   {
-//     categoryImageUrl: VueJsFramework,
-//     category: 'Gastronomia',
-//   },
-// ]
+// todo: Mostrar os dados dos posts, categorias
+// todo: Resolver bugs
+// todo: Mostrar minutos nos posts quando tem menos te 24h
 
 export default async function Blog() {
   const posts = await getPosts()
   const categories = await getCategoryFromPosts()
-  const cards = Array.from(categories).map((category) => ({
+
+  // Converte o Set em um array antes de usar slice
+  const selectedCategories = Array.from(categories).slice(0, 3)
+
+  // Cria os cards com posts filtrados por categoria
+  const categoryCards = selectedCategories.map((category) => ({
     category,
-    categoryImageUrl: `/images/${category}.png`, // Substitua pela lógica para as URLs reais
+    categoryImageUrl: `/images/${category}.png`,
+    posts: posts.filter(
+      (post) => post.category.toLowerCase() === category.toLowerCase(),
+    ),
   }))
 
   return (
     <section className="flex flex-col w-full">
+      {/* Home Section */}
       <div
         id="home"
         className="h-[calc(100vh-86px)] flex flex-col justify-start py-5 md:justify-center md:flex-row items-center gap-4 bg-blogLightGray100 relative -z-0 px-5"
@@ -97,11 +38,11 @@ export default async function Blog() {
         <div className="flex flex-col-reverse items-center justify-center md:justify-around w-full lg:flex-row gap-5">
           <div className="gap-[30px] flex flex-col justify-center md:items-start items-center max-w-[664px]">
             <h1 className="text-4xl lg:text-[64px] text-center md:text-left leading-tight font-bold">
-              Olá, Sou o Clemilson Front end dev
+              Olá, Sou o Clemilson Front-end Dev
             </h1>
             <p className="text-blogDarkGray text-left md:text-xl pl-3 border-l-[3px] border-blogBlack">
               Neste blog compartilho dicas e truques, frameworks, projetos, etc.
-              Certifique-se de inscrever-se para receber atualizações recentes
+              Certifique-se de inscrever-se para receber atualizações recentes.
             </p>
             <div className="flex items-center justify-center gap-5 md:w-full">
               <input
@@ -112,7 +53,6 @@ export default async function Blog() {
               <AppButton className="px-5">Inscrever-se</AppButton>
             </div>
           </div>
-
           <Image
             src={HomeSideImage}
             alt="User Preview WebSites in hand"
@@ -127,48 +67,35 @@ export default async function Blog() {
         </div>
       </div>
 
-      {/* Category Zone */}
-      <CategoryDropdown cards={cards} />
+      {/* Category Dropdown */}
+      <CategoryDropdown cards={categoryCards} />
 
-      {/* articles Zone */}
+      {/* Articles Section */}
       <div className="flex flex-col gap-20 w-full max-w-full px-12 py-10">
         <ArticlesSection
           headerProps={{
             sectionTitle: 'Artigos em Destaque',
-            sectionRedirectLink: '/articles',
+            sectionRedirectLink: '/articles/recent',
           }}
           post={posts}
         />
 
-        <ArticlesSection
-          headerProps={{
-            sectionTitle: 'CSS',
-            sectionRedirectLink: '/articles',
-          }}
-          post={posts}
-        />
+        {/* Renderização das Categorias */}
+        {categoryCards.map((card) => (
+          <ArticlesSection
+            key={card.category}
+            headerProps={{
+              sectionTitle: card.category ?? '',
+              sectionRedirectLink: `/articles/${card.category}?slug=${card.category?.toLowerCase()}`,
+            }}
+            post={card.posts}
+          />
+        ))}
 
-        <ArticlesSection
-          headerProps={{
-            sectionTitle: 'Javascript',
-            sectionRedirectLink: '/articles',
-          }}
-          post={posts}
-        />
-
-        <ArticlesSection
-          headerProps={{
-            sectionTitle: 'React JS',
-            sectionRedirectLink: '/articles',
-          }}
-          post={posts}
-        />
-
-        <AppButton className="px-6 mx-auto w-[166px]">Mais Artigos</AppButton>
+        <Link href="/articles" className="mx-auto w-[166px]">
+          <AppButton className="px-6 ">Mais Artigos</AppButton>
+        </Link>
       </div>
-
-      {/* Category Zone
-      <CategoryDropdown /> */}
     </section>
   )
 }

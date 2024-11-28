@@ -15,7 +15,7 @@ export function CategoryDropdown({ cards }: CategoryDropdownProps) {
   return (
     <div
       id="homeCategory"
-      className="p-16 flex flex-col justify-center items-start w-full gap-12 bg-blogLightGray100"
+      className="p-16 flex flex-col justify-center w-full gap-12 bg-blogLightGray100"
     >
       <DropdownHeader
         isDropDownOpen={isDropDownOpen}
