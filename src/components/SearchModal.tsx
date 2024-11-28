@@ -69,7 +69,7 @@ export function SearchModal() {
             className="bg-blogLightGray100 p-6 rounded-lg w-full sm:w-96 relative space-y-5"
           >
             <p className="text-sm text-center text-blogGray font-bold">
-              Você pode pesquisar chave por uma palavra aqui <br />
+              Você pode pesquisar por uma palavra chave aqui <br />
               Exemplo: “JavaScript”
             </p>
             <form
