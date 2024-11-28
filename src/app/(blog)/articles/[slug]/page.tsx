@@ -1,5 +1,5 @@
 import { SectionPost } from '@/components/ArticlesSection/SectionPost'
-import { getPostByCategory } from '@/lib/posts'
+import { filterPostByWord, getPosts } from '@/lib/posts'
 import Link from 'next/link'
 
 export default async function Article({
@@ -8,7 +8,7 @@ export default async function Article({
   searchParams: { [key: string]: string }
 }) {
   const slug = searchParams.slug || 'default'
-  const posts = await getPostByCategory(slug)
+  const posts = await filterPostByWord(slug, await getPosts())
 
   return (
     <div className="py-12 px-5">
@@ -41,18 +41,16 @@ export default async function Article({
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 flex-wrap gap-4 justify-center items-start py-16">
-        {posts
-          .filter((post) => post.category === slug)
-          .map((post) => (
-            <SectionPost
-              key={post.slug}
-              slug={post.slug}
-              postImageUrl={post.postImageUrl}
-              postTitle={post.postTitle}
-              publishDate={post.publishDate}
-              poster={post.poster}
-            />
-          ))}
+        {posts.map((post) => (
+          <SectionPost
+            key={post.slug}
+            slug={post.slug}
+            postImageUrl={post.postImageUrl}
+            postTitle={post.postTitle}
+            publishDate={post.publishDate}
+            poster={post.poster}
+          />
+        ))}
       </div>
     </div>
   )

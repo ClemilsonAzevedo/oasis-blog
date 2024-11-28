@@ -1,9 +1,18 @@
-import { SectionPost } from '@/components/ArticlesSection/SectionPost'
-import { getPosts } from '@/lib/posts'
+import { ArticlesSection } from '@/components/ArticlesSection'
+import { getCategoryFromPosts, getPosts } from '@/lib/posts'
 import Link from 'next/link'
 
 export default async function Articles() {
   const posts = await getPosts()
+  const categories = await getCategoryFromPosts()
+
+  // Cria os cards com posts filtrados por categoria
+  const categoryCards = Array.from(categories).map((category) => ({
+    category,
+    posts: posts.filter(
+      (post) => post.category.toLowerCase() === category.toLowerCase(),
+    ),
+  }))
 
   return (
     <div className="py-12 px-5">
@@ -13,7 +22,7 @@ export default async function Articles() {
         </span>
         <div className="space-y-[18px]">
           <h2 className="text-5xl leading-[64px] font-bold text-[#333333]">
-            Encontre todos os nossos blogs &quot;recentes&quot; aqui
+            Encontre todos os nossos blogs vendo todas as categorias
           </h2>
           <p className="leading-[150%] text-[#666666]">
             nossos blogs são escritos a partir de muitas pesquisas e escritores
@@ -35,15 +44,15 @@ export default async function Articles() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 flex-wrap gap-4 justify-center items-start py-16">
-        {posts.map((post) => (
-          <SectionPost
-            key={post.postTitle}
-            slug={post.slug}
-            postImageUrl={post.postImageUrl}
-            postTitle={post.postTitle}
-            publishDate={post.publishDate}
-            poster={post.poster}
+      <div className="flex flex-col  md:justify-start items-start justify-start gap-20 py-10 w-full">
+        {categoryCards.map((card) => (
+          <ArticlesSection
+            key={card.category}
+            headerProps={{
+              sectionTitle: card.category ?? '',
+              sectionRedirectLink: `/articles/${card.category}?slug=${card.category?.toLowerCase()}`,
+            }}
+            post={card.posts}
           />
         ))}
       </div>

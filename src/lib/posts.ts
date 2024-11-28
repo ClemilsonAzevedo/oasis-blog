@@ -25,3 +25,7 @@ export async function getPostByCategory(category: string) {
 export async function getCategoryFromPosts() {
   return new Set((await getPosts()).map((post) => post.category))
 }
+
+export function filterPostByWord(slug: string, posts: PostProps[]) {
+  return posts.filter((post) => post.postTitle.toLowerCase().includes(slug))
+}

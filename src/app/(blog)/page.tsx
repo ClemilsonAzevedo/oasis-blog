@@ -8,10 +8,6 @@ import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-// todo: Mostrar os dados dos posts, categorias
-// todo: Resolver bugs
-// todo: Mostrar minutos nos posts quando tem menos te 24h
-
 export default async function Blog() {
   const posts = await getPosts()
   const categories = await getCategoryFromPosts()
@@ -67,20 +63,20 @@ export default async function Blog() {
         </div>
       </div>
 
-      {/* Category Dropdown */}
+      {/* Renderização das Categorias */}
       <CategoryDropdown cards={categoryCards} />
 
-      {/* Articles Section */}
+      {/* Renderização dos posts em destaque */}
       <div className="flex flex-col gap-20 w-full max-w-full px-12 py-10">
         <ArticlesSection
           headerProps={{
             sectionTitle: 'Artigos em Destaque',
-            sectionRedirectLink: '/articles/recent',
+            sectionRedirectLink: '/articles',
           }}
           post={posts}
         />
 
-        {/* Renderização das Categorias */}
+        {/* Renderização dos posts pelas Categorias */}
         {categoryCards.map((card) => (
           <ArticlesSection
             key={card.category}

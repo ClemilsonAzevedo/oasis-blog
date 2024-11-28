@@ -6,6 +6,9 @@ import { AppFooter } from '@/components/AppFooter'
 import { AppHeader } from '@/components/AppHeader'
 import './globals.css'
 
+import { SearchModal } from '@/components/SearchModal'
+import { SearchProvider } from '@/context/SearchContext'
+
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-plus-jakarta-sans',
@@ -59,9 +62,12 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] max-w-[1440px] selection:bg-blogYellow/30`}
       >
-        <AppHeader />
-        {children}
-        <AppFooter />
+        <SearchProvider>
+          <AppHeader />
+          <SearchModal />
+          {children}
+          <AppFooter />
+        </SearchProvider>
       </body>
     </html>
   )

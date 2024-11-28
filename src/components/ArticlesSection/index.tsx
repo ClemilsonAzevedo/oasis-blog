@@ -10,14 +10,14 @@ export function ArticlesSection({
   post,
 }: ArticlesSectionProps) {
   return (
-    <article>
+    <article className="w-full">
       <SectionHeader
         headerProps={{
           sectionTitle,
           sectionRedirectLink,
         }}
       />
-      <div className="flex flex-col md:flex-row md:justify-start items-center justify-center gap-9">
+      <div className="flex flex-col md:flex-row md:justify-start items-center gap-9">
         {post?.map((post) => (
           <SectionPost
             key={post.postTitle}
