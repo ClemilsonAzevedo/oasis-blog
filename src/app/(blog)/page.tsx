@@ -1,11 +1,9 @@
-import VueJsFramework from '@/app/assets/FrameworkVueJs.svg'
 import HomeSideImage from '@/app/assets/HomeSideImage.svg'
 import { AppButton } from '@/components/AppButton'
 import { ArticlesSection } from '@/components/ArticlesSection'
 import { CategoryDropdown } from '@/components/CategoryDropdown'
-import type { dropdownCardProps } from '@/components/CategoryDropdown/DropdownCard'
 import { MoveToBottomButton } from '@/components/MoveToBottomButton'
-import { getPosts } from '@/lib/posts'
+import { getCategoryFromPosts, getPosts } from '@/lib/posts'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 
@@ -51,39 +49,44 @@ import Image from 'next/image'
 //     },
 //   },
 // ]
-export const fakeCategories: dropdownCardProps[] = [
-  {
-    categoryImageUrl: VueJsFramework,
-    category: 'Tecnologia',
-  },
-  {
-    categoryImageUrl: VueJsFramework,
-    category: 'Moda',
-  },
-  {
-    categoryImageUrl: VueJsFramework,
-    category: 'clema',
-  },
-  {
-    categoryImageUrl: VueJsFramework,
-    category: 'clemilson',
-  },
-  {
-    categoryImageUrl: VueJsFramework,
-    category: 'rust',
-  },
-  {
-    categoryImageUrl: VueJsFramework,
-    category: 'Esportes',
-  },
-  {
-    categoryImageUrl: VueJsFramework,
-    category: 'Gastronomia',
-  },
-]
+// export const fakeCategories: dropdownCardProps[] = [
+//   {
+//     categoryImageUrl: VueJsFramework,
+//     category: 'Tecnologia',
+//   },
+//   {
+//     categoryImageUrl: VueJsFramework,
+//     category: 'Moda',
+//   },
+//   {
+//     categoryImageUrl: VueJsFramework,
+//     category: 'clema',
+//   },
+//   {
+//     categoryImageUrl: VueJsFramework,
+//     category: 'clemilson',
+//   },
+//   {
+//     categoryImageUrl: VueJsFramework,
+//     category: 'rust',
+//   },
+//   {
+//     categoryImageUrl: VueJsFramework,
+//     category: 'Esportes',
+//   },
+//   {
+//     categoryImageUrl: VueJsFramework,
+//     category: 'Gastronomia',
+//   },
+// ]
 
 export default async function Blog() {
   const posts = await getPosts()
+  const categories = await getCategoryFromPosts()
+  const cards = Array.from(categories).map((category) => ({
+    category,
+    categoryImageUrl: `/images/${category}.png`, // Substitua pela lógica para as URLs reais
+  }))
 
   return (
     <section className="flex flex-col w-full">
@@ -125,7 +128,7 @@ export default async function Blog() {
       </div>
 
       {/* Category Zone */}
-      <CategoryDropdown cards={fakeCategories} />
+      <CategoryDropdown cards={cards} />
 
       {/* articles Zone */}
       <div className="flex flex-col gap-20 w-full max-w-full px-12 py-10">
@@ -137,12 +140,12 @@ export default async function Blog() {
           post={posts}
         />
 
-        {/* <ArticlesSection
+        <ArticlesSection
           headerProps={{
             sectionTitle: 'CSS',
             sectionRedirectLink: '/articles',
           }}
-          post={fakePosts}
+          post={posts}
         />
 
         <ArticlesSection
@@ -150,7 +153,7 @@ export default async function Blog() {
             sectionTitle: 'Javascript',
             sectionRedirectLink: '/articles',
           }}
-          post={fakePosts}
+          post={posts}
         />
 
         <ArticlesSection
@@ -158,8 +161,8 @@ export default async function Blog() {
             sectionTitle: 'React JS',
             sectionRedirectLink: '/articles',
           }}
-          post={fakePosts}
-        /> */}
+          post={posts}
+        />
 
         <AppButton className="px-6 mx-auto w-[166px]">Mais Artigos</AppButton>
       </div>

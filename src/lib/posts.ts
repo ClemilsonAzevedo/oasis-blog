@@ -21,3 +21,7 @@ export async function getPosts(): Promise<PostProps[]> {
 export async function getPostByCategory(category: string) {
   return (await getPosts()).filter((post) => post.category === category)
 }
+
+export async function getCategoryFromPosts() {
+  return new Set((await getPosts()).map((post) => post.category))
+}
