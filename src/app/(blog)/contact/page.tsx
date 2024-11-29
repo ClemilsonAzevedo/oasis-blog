@@ -1,10 +1,21 @@
+'use client'
+
+import dynamic from 'next/dynamic'
+
 import HomeCircle from '@/app/assets/icons/HomeCircle.svg'
 import MailCircle from '@/app/assets/icons/MailCircle.svg'
 import PhoneCircle from '@/app/assets/icons/PhoneCircle.svg'
 import 'leaflet/dist/leaflet.css'
 import Image from 'next/image'
 import { Form } from './components/Form'
-import { MapComponent } from './components/map'
+
+// Correção da importação dinâmica com o tipo correto
+const MapComponent = dynamic(
+  () => import('./components/map').then((mod) => mod.MapComponent),
+  {
+    ssr: false,
+  },
+)
 
 export default function Contact() {
   return (
