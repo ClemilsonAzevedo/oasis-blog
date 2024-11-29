@@ -2,6 +2,7 @@ import type { PostProps } from '@/components/ArticlesSection/SectionPost'
 import { readdir } from 'node:fs/promises'
 import path from 'node:path'
 
+// Caminho para os posts
 const postsPath = path.join(process.cwd(), 'src/app/(blog)/(posts)')
 
 // Função para obter todos os posts
