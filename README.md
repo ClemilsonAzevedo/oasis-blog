@@ -40,12 +40,7 @@ MDX (Markdown + JSX) é uma extensão do Markdown que permite incorporar compone
   <img align="center" alt="Figma" height="60" width="80" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg">
 </div>
 
-•	**Next.js**: Framework React para SSR (Server-Side Rendering), SSG (Static Site Generation) e Server Components.
-
-•	**TypeScript**: Tipagem estática para maior confiabilidade e escalabilidade do código.
-
-•	**TailwindCSS**: Framework de estilização para designs rápidos e responsivos.
-
+#### API's e Outras
 •	**Context API**: Gerenciamento de estado simples e eficiente para componentes React.
 	
 •	**MDX do Next.js**: Criação de posts com Markdown e componentes React embutidos.
@@ -90,4 +85,4 @@ MDX (Markdown + JSX) é uma extensão do Markdown que permite incorporar compone
 
 Esta versão do Oasis Blog foi desenvolvido por [Clemilson Azevedo](https://github.com/ClemilsonAzevedo).
 
-![Alt](https://repobeats.axiom.co/api/embed/625c017fccb74cb340ac5f38f2a98f7e4a8c7758.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/84c3bb6ee2ab969e63c74a00d1b69b6fad133805.svg "Repobeats analytics image")
