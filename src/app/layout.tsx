@@ -58,9 +58,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="bg-blogLightGray200">
       <body
-        className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] max-w-[1440px] selection:bg-blogYellow/30`}
+        className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] max-w-[1440px] mx-auto selection:bg-blogYellow/30`}
       >
         <SearchProvider>
           <AppHeader />
