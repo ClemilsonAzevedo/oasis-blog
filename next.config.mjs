@@ -11,6 +11,10 @@ import remarkToc from 'remark-toc'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  output: 'standalone',
+  experimental: {
+    turbotrace: {},
+  },
   images: {
     remotePatterns: [
       {

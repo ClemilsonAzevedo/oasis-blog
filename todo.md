@@ -3,3 +3,4 @@
 - [ ] Adicionar Imagem as categorias
 - [ ] Adicionar imagem aos posts
 - [ ] Colocar categorias reais no Footer
+- [ ] Navegação em Produção
