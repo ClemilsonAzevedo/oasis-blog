@@ -18,10 +18,10 @@ export default async function Blog() {
 
   // Cria os cards com posts filtrados por categoria
   const categoryCards = selectedCategories.map((category) => ({
-    category,
-    categoryImageUrl: `/images/${category}.png`,
+    category: category ?? '', // Provide a default value of an empty string if category is undefined
     posts: posts.filter(
-      (post) => post.category.toLowerCase() === category.toLowerCase(),
+      (post) =>
+        (post.category ?? '').toLowerCase() === (category ?? '').toLowerCase(),
     ),
   }))
 

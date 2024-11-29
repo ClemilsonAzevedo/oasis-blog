@@ -4,7 +4,7 @@ import Link from 'next/link'
 import NoImage from '@/app/assets/SemImagem.png'
 
 export type dropdownCardProps = {
-  category: string
+  category: string | ''
   categoryImageUrl?: string | StaticImageData
 }
 
