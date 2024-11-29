@@ -6,6 +6,9 @@ import { AppFooter } from '@/components/AppFooter'
 import { AppHeader } from '@/components/AppHeader'
 import './globals.css'
 
+import { SearchModal } from '@/components/SearchModal'
+import { SearchProvider } from '@/context/SearchContext'
+
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-plus-jakarta-sans',
@@ -38,20 +41,10 @@ export const metadata: Metadata = {
     title: 'Oasis Blog | Tudo sobre Desenvolvimento Web',
     description:
       'Explore insights valiosos sobre Next.js, React e otimização de aplicativos modernos.',
-    url: 'https://www.oasisblog.com',
     type: 'website',
     locale: 'pt_BR',
-    images: [
-      {
-        url: 'https://www.oasisblog.com/imagem-og.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Oasis Blog - Desenvolvimento Web',
-      },
-    ],
   },
   twitter: {
-    card: 'summary_large_image',
     site: '@OasisBlog',
     title: 'Oasis Blog | Desenvolvimento Web',
     description:
@@ -65,13 +58,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className="bg-blogLightGray200">
       <body
-        className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] max-w-[1440px] selection:bg-blogYellow/30`}
+        className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] max-w-[1440px] mx-auto selection:bg-blogYellow/30`}
       >
-        <AppHeader />
-        {children}
-        <AppFooter />
+        <SearchProvider>
+          <AppHeader />
+          <SearchModal />
+          {children}
+          <AppFooter />
+        </SearchProvider>
       </body>
     </html>
   )

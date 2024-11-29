@@ -1,0 +1,92 @@
+---
+postTitle: As rotas no framework Nextjs
+category: "nextjs"
+poster: {
+  name: 'Clemilson Azevedo',
+  imageUrl: 'https://github.com/clemilsonazevedo.png'
+}
+publishDate: 2024-11-29T11:00:00Z
+---
+
+import { PostHeader } from '../../_components/PostHeader'
+
+<PostHeader
+  title="As rotas no framework Nextjs"
+  category="tecnologia"
+  publishDate="2024-09-20T11:00:00Z"
+  poster={{
+    name: 'Clemilson Azevedo',
+    imageUrl: 'https://github.com/clemilsonazevedo.png'
+  }}
+/>
+
+{/* <div className="space-y-5">
+  <div className='space-y-4'>
+    <div>
+      <span className='px-3 py-[6px] rounded-[6px] bg-blogYellow text-blogWhite text-sm font-medium leading-5'>Tecnologia</span>
+    </div>
+    # As rotas no framework Nextjs 
+  </div>
+  <div className="flex items-center gap-1 not-prose text-zinc-500 text-sm">
+    <div className='flex items-center gap-2'>
+      <Image src={'https://github.com/clemilsonazevedo.png'} width={28} height={28} className='rounded-full' />
+      <div className='flex items-center gap-6'>
+        ######  Tracey Wilson
+        <time style={{ fontFamily: 'Work Sans, sans-serif', fontSize: '14px' }}>
+          {new Date("2024-07-24T11:00:00Z").toLocaleDateString('pt-BR', {
+            dateStyle: 'medium',
+          })}
+        </time>
+      </div>
+    </div>
+  </div>
+</div> */}
+
+>[!note] Pages Folder
+>
+>A pasta pages é onde englobamos, a pasta API, as páginas da aplicação e ela pode estar ou não dentro de uma pasta src
+
+## Rotas de uma aplicação Nextjs
+
+No nextjs nós temos o **File-System Routing** ou seja, apenas criando um arquivo com o nome desejado e dentro ter um componente exportado como default, já cria uma rota.
+Embora também podemos criar uma pasta dentro de pages com o nome da rota e nomear o arquivo dentro dela de index.tsx
+
+Se por acaso eu quiser uma rota dinamica, como passar um id em uma rota de produtos para selecionar um produto, em vez de index.tsx eu poderia criar um `[id].tsx`, assim podendo passar qualquer id na rota.
+
+Se por acaso eu quiser pegar parametros da rota do Next posso usar do next/router o hook useRouter.
+
+
+## Document no Next
+
+Para configurar coisas relacionadas ao HTML no Next, devemos criar um arquivo document dentro da pasta pages e:
+```tsx
+//_document.tsx
+import { Html, Head, Main, NextScript } from 'next/document'
+
+export default function Document(){
+
+return(
+	<Html>
+		<Head>
+			//Link das fonts aqui
+		</Head>
+		<body>
+			<Main />
+			<NextScript />
+		</body>
+	</Html>
+)
+}
+```
+
+## Estilos
+
+Não devemos colocar a pasta styles dentro de Pages, melhor criar uma pasta pages dentro de styles e estilizar cada uma das páginas.
+
+## Imagens
+
+Usar sempre o next/image
+
+## Data Fetching
+
+

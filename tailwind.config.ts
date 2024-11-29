@@ -15,10 +15,12 @@ const config: Config = {
         blogYellow: 'var(--yellow)',
         blogLightGray100: 'var(--light-gray-100)',
         blogLightGray200: 'var(--light-gray-200)',
+        blogSecondary50: 'var(--secondary-50)',
+        blogSecondary100: 'var(--secondary-100)',
         blogDarkGray: 'var(--dark-gray)',
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }
 export default config

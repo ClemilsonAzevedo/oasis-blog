@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,17 +7,35 @@
   --white: #FFFFFE;
   --light-gray-100: #EFF0F3;
   --light-gray-200: #E4E5E9;
+  --secondary-50: #F6F6F7;
+  --secondary-100: #E8E8EA;
   --gray: #C0C0C0;
   --dark-gray: #9A9494;
   --black: #2B2C34;
   --yellow: #FFC344;
 }
 
-@layer base{
-  body {
-    color: var(--black);
-    background: var(--white);
+body {
+  color: var(--black);
+  background: var(--white);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s forwards;
+}
+
+@layer base{
   #home{
   background-image: url('./assets/HomeBackgroundImage.svg');
   background-size: cover; 
@@ -31,9 +50,10 @@
   }
 }
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&family=Source+Serif+Pro:wght@400;600&display=swap');

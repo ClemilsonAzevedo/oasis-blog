@@ -1,5 +1,6 @@
 import anyBookSearchedInPexels from '@/app/assets/algumLivroDoPexels.jpg'
 import type { StaticImageData } from 'next/image'
+import Link from 'next/link'
 import { PostImage } from './PostImage'
 import { PostTitle } from './PostTitle'
 import { Poster } from './Poster'
@@ -7,7 +8,9 @@ import { Poster } from './Poster'
 export type PostProps = {
   postImageUrl: StaticImageData | string
   postTitle: string
-  createdAt: Date
+  slug?: string
+  category?: string
+  publishDate: Date
   poster: {
     name: string
     imageUrl: string
@@ -17,20 +20,26 @@ export type PostProps = {
 export function SectionPost({
   postImageUrl,
   postTitle,
-  createdAt,
+  publishDate,
+  slug,
   poster,
 }: PostProps) {
   return (
-    <div className="flex flex-col items-start justify-between p-5 m-px w-[300px] h-[425px] hover:shadow rounded-xl focus:shadow-md">
-      <div className="flex flex-col items-start gap-6">
-        <PostImage postImageUrl={postImageUrl ?? anyBookSearchedInPexels} />
-        <PostTitle title={postTitle} />
+    <Link
+      href={`/${slug}`}
+      className="transform transition duration-300 ease-in-out opacity-0 translate-y-5 animate-fadeIn"
+    >
+      <div className="flex flex-col items-start justify-between p-5 m-px w-[300px] h-[425px] hover:shadow rounded-xl focus:shadow-md">
+        <div className="flex flex-col items-start gap-6">
+          <PostImage postImageUrl={postImageUrl ?? anyBookSearchedInPexels} />
+          <PostTitle title={postTitle} />
+        </div>
+        <Poster
+          imageUrl={poster?.imageUrl}
+          name={poster?.name}
+          post={{ publishDate }}
+        />
       </div>
-      <Poster
-        imageUrl={poster.imageUrl}
-        name={poster.name}
-        post={{ createdDate: createdAt }}
-      />
-    </div>
+    </Link>
   )
 }

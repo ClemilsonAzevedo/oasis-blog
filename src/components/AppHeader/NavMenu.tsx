@@ -3,12 +3,15 @@
 import { CloseIcon } from '@/app/assets/icons/Close'
 import { MagnifyingGlassIcon } from '@/app/assets/icons/MagnifyingGlass'
 import { MenuIcon } from '@/app/assets/icons/Menu'
+import { useSearch } from '@/context/SearchContext'
 import Link from 'next/link'
 import { useState } from 'react'
+import { MoveToBottomButton } from '../MoveToBottomButton'
 
-// todo:Refatorar Os Menus
+// todo:Fazer a pesquisa funcional
 
 export function NavMenu() {
+  const { toggleSearch } = useSearch()
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -24,20 +27,27 @@ export function NavMenu() {
           </Link>
         </li>
         <li>
-          <Link href="/categories" legacyBehavior>
-            Categorias
+          <Link href="#homeCategory" scroll={false} legacyBehavior>
+            <MoveToBottomButton>Categories</MoveToBottomButton>
           </Link>
         </li>
-        <li className="flex items-center py-1 w-28">
-          <label htmlFor="search" className="mr-[10px]">
+        <li>
+          <Link href="/contact" legacyBehavior>
+            Contato
+          </Link>
+        </li>
+        <li>
+          <button
+            type="button"
+            onClick={toggleSearch}
+            aria-label="Abrir pesquisa"
+            className="flex items-center  py-1 w-28 gap-[10px]"
+          >
             <MagnifyingGlassIcon />
-          </label>
-          <input
-            type="text"
-            id="search"
-            placeholder="Procurar"
-            className="placeholder:text-blogBlack placeholder:text-xl focus:outline-none flex-1 bg-transparent w-[85px]"
-          />
+            <span id="search" className="text-xl">
+              Procurar
+            </span>
+          </button>
         </li>
       </ul>
 
@@ -75,20 +85,25 @@ export function NavMenu() {
               </Link>
             </li>
             <li>
-              <Link href="/categorias" legacyBehavior>
-                Categorias
+              <MoveToBottomButton>Categories</MoveToBottomButton>
+            </li>
+            <li>
+              <Link href="/contact" legacyBehavior>
+                Contato
               </Link>
             </li>
-            <li className="flex items-center py-1 w-full">
-              <label htmlFor="search" className="mr-[10px]">
+            <li>
+              <button
+                type="button"
+                onClick={toggleSearch}
+                aria-label="Abrir pesquisa"
+                className="flex items-center  py-1 w-28 gap-[10px]"
+              >
                 <MagnifyingGlassIcon />
-              </label>
-              <input
-                type="text"
-                id="search"
-                placeholder="Procurar"
-                className="placeholder:text-blogBlack placeholder:text-xl focus:outline-none flex-1 bg-transparent w-full"
-              />
+                <span id="search" className="text-xl">
+                  Procurar
+                </span>
+              </button>
             </li>
           </ul>
         </div>
