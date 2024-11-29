@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "import": {
+    "include": ["src/app/(blog)/(posts)/**/*.mdx"]
+  },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",

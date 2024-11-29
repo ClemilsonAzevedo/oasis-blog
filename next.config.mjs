@@ -1,4 +1,8 @@
 import createMDX from '@next/mdx'
+import rehypeShiki from '@shikijs/rehype'
+import { transformerNotationHighlight } from '@shikijs/transformers'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
@@ -28,6 +32,23 @@ const nextConfig = {
 
 export default createMDX({
   options: {
+    rehypePlugins: [
+      [
+        rehypeShiki,
+        {
+          theme: 'vesper',
+          trimEndingNewline: true,
+          transformers: [transformerNotationHighlight()],
+        },
+      ],
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: 'append',
+        },
+      ],
+    ],
     remarkPlugins: [
       remarkFrontmatter,
       remarkGfm,
