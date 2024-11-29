@@ -14,7 +14,7 @@ export default async function Blog() {
   const categories = await getCategoryFromPosts()
 
   // Converte o Set em um array antes de usar slice
-  const selectedCategories = Array.from(categories).slice(0, 3)
+  const selectedCategories = Array.from(categories).slice(0, 5)
 
   // Cria os cards com posts filtrados por categoria
   const categoryCards = selectedCategories.map((category) => ({
