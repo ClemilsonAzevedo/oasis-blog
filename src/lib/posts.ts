@@ -23,10 +23,10 @@ export async function getPosts(): Promise<PostProps[]> {
   return posts // Retorna a lista de posts ordenada
 }
 
-export async function getPostByCategory(category: string) {
-  // Filtra os posts pela categoria especificada
-  return (await getPosts()).filter((post) => post.category === category)
-}
+// export async function getPostByCategory(category: string) {
+//   // Filtra os posts pela categoria especificada
+//   return ()
+// }
 
 // Função para obter todas as categorias dos posts
 export async function getCategoryFromPosts() {

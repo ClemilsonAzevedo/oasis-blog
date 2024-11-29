@@ -1,5 +1,5 @@
 import { SectionPost } from '@/components/ArticlesSection/SectionPost'
-import { getPostByCategory } from '@/lib/posts'
+import { getPosts } from '@/lib/posts'
 import Link from 'next/link'
 
 // Página para exibir posts filtrados por categoria
@@ -9,7 +9,8 @@ export default async function Categories({
   searchParams: { [key: string]: string }
 }) {
   const category = searchParams.category.toLowerCase() || 'default'
-  const posts = await getPostByCategory(category)
+  const posts = await getPosts()
+  const categoryPosts = posts.filter((post) => post.category === category)
 
   return (
     <div className="py-12 px-5">
@@ -31,7 +32,7 @@ export default async function Categories({
       </header>
 
       {/* Exibe mensagem caso nenhum post seja encontrado */}
-      {posts.length === 0 && (
+      {categoryPosts.length === 0 && (
         <div className="text-5xl text-center py-10 flex flex-col items-center justify-center gap-5">
           <h1 className="text-5xl text-center">Nenhum post encontrado</h1>
           <Link
@@ -45,7 +46,7 @@ export default async function Categories({
 
       {/* Exibe a lista de posts da categoria */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 flex-wrap gap-4 justify-center items-start py-16">
-        {posts.map((post) => (
+        {categoryPosts.map((post) => (
           <SectionPost
             key={post.postTitle}
             slug={post.slug}
