@@ -1,12 +1,16 @@
 import type { PostProps } from '@/components/ArticlesSection/SectionPost'
 import { readdir } from 'node:fs/promises'
+import path from 'node:path'
+
+// Caminho para os posts
+const postsPath = path.join(process.cwd(), 'src/app/(blog)/(posts)')
 
 // Função para obter todos os posts
 export async function getPosts(): Promise<PostProps[]> {
   // Lê os diretórios dentro de '/src/app/(blog)/(posts)' para obter os slugs dos posts
-  const slugs = (
-    await readdir('./src/app/(blog)/(posts)', { withFileTypes: true })
-  ).filter((dirent) => dirent.isDirectory()) // Filtra apenas os diretórios (posts)
+  const slugs = (await readdir(postsPath, { withFileTypes: true })).filter(
+    (dirent) => dirent.isDirectory(),
+  ) // Filtra apenas os diretórios (posts)
 
   // Mapeia os slugs para importar o conteúdo de cada post
   const posts = await Promise.all(
@@ -23,10 +27,10 @@ export async function getPosts(): Promise<PostProps[]> {
   return posts // Retorna a lista de posts ordenada
 }
 
-export async function getPostByCategory(category: string) {
-  // Filtra os posts pela categoria especificada
-  return (await getPosts()).filter((post) => post.category === category)
-}
+// export async function getPostByCategory(category: string) {
+//   // Filtra os posts pela categoria especificada
+//   return ()
+// }
 
 // Função para obter todas as categorias dos posts
 export async function getCategoryFromPosts() {
