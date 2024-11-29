@@ -32,6 +32,11 @@ export function NavMenu() {
           </Link>
         </li>
         <li>
+          <Link href="/contact" legacyBehavior>
+            Contato
+          </Link>
+        </li>
+        <li>
           <button
             type="button"
             onClick={toggleSearch}
@@ -81,6 +86,11 @@ export function NavMenu() {
             </li>
             <li>
               <MoveToBottomButton>Categories</MoveToBottomButton>
+            </li>
+            <li>
+              <Link href="/contact" legacyBehavior>
+                Contato
+              </Link>
             </li>
             <li>
               <button
