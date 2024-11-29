@@ -2,6 +2,7 @@
 
 import type { MDXComponents } from 'mdx/types'
 
+// Função que recebe os componentes padrão do MDX e retorna uma versão customizada dos mesmos
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,

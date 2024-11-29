@@ -8,8 +8,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { MoveToBottomButton } from '../MoveToBottomButton'
 
-// todo:Fazer a pesquisa funcional
-
 export function NavMenu() {
   const { toggleSearch } = useSearch()
   const [menuOpen, setMenuOpen] = useState(false)

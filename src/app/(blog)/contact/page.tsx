@@ -9,11 +9,12 @@ import 'leaflet/dist/leaflet.css'
 import Image from 'next/image'
 import { Form } from './components/Form'
 
+// Eu fiz isso aqui no mapa porque ele estava dando erro na renderização do lado do servidor
 // Correção da importação dinâmica com o tipo correto
 const MapComponent = dynamic(
   () => import('./components/map').then((mod) => mod.MapComponent),
   {
-    ssr: false,
+    ssr: false, // Desativa a renderização do lado do servidor para o componente do mapa
   },
 )
 
@@ -31,6 +32,7 @@ export default function Contact() {
           </p>
         </div>
         <div className="flex flex-wrap justify-center items-center gap-5 w-full">
+          {/* Cartões de informações de contato */}
           <div className="shadow w-[373px] h-[244px] bg-white rounded-2xl flex flex-col items-center justify-center gap-5">
             <Image src={HomeCircle} alt="Home icon" width={70} height={70} />
             <span className="text-blogYellow text-xl font-bold">Office</span>
@@ -57,8 +59,10 @@ export default function Contact() {
 
       <div className="relative -z-0 px-6">
         <div className="relative -z-10">
+          {/* Mapa dinâmico */}
           <MapComponent />
         </div>
+        {/* Formulário de contato */}
         <Form />
       </div>
     </section>

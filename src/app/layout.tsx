@@ -34,21 +34,8 @@ export const metadata: Metadata = {
     'framework React',
     'escalabilidade',
     'web apps',
-  ],
-  robots: 'index, follow',
-  openGraph: {
-    title: 'Oasis Blog | Tudo sobre Desenvolvimento Web',
-    description:
-      'Explore insights valiosos sobre Next.js, React e otimização de aplicativos modernos.',
-    type: 'website',
-    locale: 'pt_BR',
-  },
-  twitter: {
-    site: '@OasisBlog',
-    title: 'Oasis Blog | Desenvolvimento Web',
-    description:
-      'Aprenda com os melhores artigos sobre Next.js, React, JavaScript e muito mais.',
-  },
+  ], // Palavras-chave para o SEO
+  robots: 'index, follow', // Instruções para o robô de busca
 }
 
 export default function RootLayout({
@@ -62,10 +49,11 @@ export default function RootLayout({
         className={`${plusJakartaSans.className} antialiased grid grid-rows-[86px_auto_auto] max-w-[1440px] mx-auto selection:bg-blogYellow/30`}
       >
         <SearchProvider>
-          <AppHeader />
-          <SearchModal />
-          {children}
-          <AppFooter />
+          {/* Provedor de contexto para a busca */}
+          <AppHeader /> {/* Cabeçalho da aplicação */}
+          <SearchModal /> {/* Modal de busca */}
+          {children} {/* Conteúdo da página */}
+          <AppFooter /> {/* Rodapé da aplicação */}
         </SearchProvider>
       </body>
     </html>

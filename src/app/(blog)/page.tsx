@@ -10,15 +10,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default async function Blog() {
+  // Obtenção dos posts e categorias
   const posts = await getPosts()
   const categories = await getCategoryFromPosts()
 
-  // Converte o Set em um array antes de usar slice
+  // Seleciona as primeiras 5 categorias
   const selectedCategories = Array.from(categories).slice(0, 5)
 
-  // Cria os cards com posts filtrados por categoria
+  // Cria os cards de posts filtrados por categoria
   const categoryCards = selectedCategories.map((category) => ({
-    category: category ?? '', // Provide a default value of an empty string if category is undefined
+    category: category ?? '', // Valor default para categoria caso esteja undefined
     posts: posts.filter(
       (post) =>
         (post.category ?? '').toLowerCase() === (category ?? '').toLowerCase(),
@@ -27,7 +28,7 @@ export default async function Blog() {
 
   return (
     <section className="flex flex-col w-full">
-      {/* Home Section */}
+      {/* Seção inicial (Home) */}
       <div
         id="home"
         className="h-[calc(100vh-86px)] flex flex-col justify-start py-5 md:justify-center md:flex-row items-center gap-4 bg-blogLightGray100 relative -z-0 px-5"
@@ -57,10 +58,10 @@ export default async function Blog() {
         </div>
       </div>
 
-      {/* Renderização das Categorias */}
+      {/* Renderiza o Dropdown de Categorias */}
       <CategoryDropdown cards={categoryCards} />
 
-      {/* Renderização dos posts em destaque */}
+      {/* Seção de artigos em destaque */}
       <div className="flex flex-col gap-20 w-full max-w-full px-12 py-10">
         <ArticlesSection
           headerProps={{
@@ -70,7 +71,7 @@ export default async function Blog() {
           post={posts}
         />
 
-        {/* Renderização dos posts pelas Categorias */}
+        {/* Renderiza os artigos por categorias */}
         {categoryCards.map((card) => (
           <ArticlesSection
             key={card.category}
@@ -82,6 +83,7 @@ export default async function Blog() {
           />
         ))}
 
+        {/* Link para mais artigos */}
         <Link href="/articles" className="mx-auto w-[166px]">
           <AppButton className="px-6 ">Mais Artigos</AppButton>
         </Link>

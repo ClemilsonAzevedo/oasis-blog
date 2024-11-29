@@ -1,0 +1,5 @@
+- [ ] Navegar para a página home quando estiver fora dela e clicar no link de categories
+- [ ] Fazer a parte mobile para o código no MDX
+- [ ] Adicionar Imagem as categorias
+- [ ] Adicionar imagem aos posts
+- [ ] Colocar categorias reais no Footer

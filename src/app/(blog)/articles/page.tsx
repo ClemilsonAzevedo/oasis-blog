@@ -2,6 +2,7 @@ import { ArticlesSection } from '@/components/ArticlesSection'
 import { getCategoryFromPosts, getPosts } from '@/lib/posts'
 import Link from 'next/link'
 
+// Página para exibir artigos organizados por categorias
 export default async function Articles() {
   const posts = await getPosts()
   const categories = await getCategoryFromPosts()
@@ -22,6 +23,7 @@ export default async function Articles() {
           NOSSOS BLOGS
         </span>
         <div className="space-y-[18px]">
+          {/* Exibe o título e descrição da página */}
           <h2 className="text-5xl leading-[64px] font-bold text-[#333333]">
             Encontre todos os nossos blogs vendo todas as categorias
           </h2>
@@ -33,6 +35,7 @@ export default async function Articles() {
         </div>
       </header>
 
+      {/* Exibe mensagem caso nenhum post seja encontrado */}
       {posts.length === 0 && (
         <div className="text-5xl text-center py-10 flex flex-col items-center justify-center gap-5">
           <h1 className="text-5xl text-center">Nenhum post encontrado</h1>
@@ -45,7 +48,8 @@ export default async function Articles() {
         </div>
       )}
 
-      <div className="flex flex-col  md:justify-start items-start justify-start gap-20 py-10 w-full">
+      {/* Exibe os posts organizados por categoria */}
+      <div className="flex flex-col md:justify-start items-start justify-start gap-20 py-10 w-full">
         {categoryCards.map((card) => (
           <ArticlesSection
             key={card.category}
