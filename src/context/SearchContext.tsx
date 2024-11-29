@@ -1,12 +1,6 @@
 'use client'
 
-import {
-  type ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import React, { type ReactNode, useContext, useEffect, useState } from 'react'
 
 type SearchContextType = {
   isSearchOpen: boolean
@@ -15,7 +9,9 @@ type SearchContextType = {
   setSearchQuery: (query: string) => void
 }
 
-const SearchContext = createContext<SearchContextType | undefined>(undefined)
+const SearchContext = React.createContext<SearchContextType | undefined>(
+  undefined,
+)
 
 export const useSearch = () => {
   const context = useContext(SearchContext)

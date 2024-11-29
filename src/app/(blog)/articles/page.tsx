@@ -8,9 +8,10 @@ export default async function Articles() {
 
   // Cria os cards com posts filtrados por categoria
   const categoryCards = Array.from(categories).map((category) => ({
-    category,
+    category: category ?? '',
     posts: posts.filter(
-      (post) => post.category.toLowerCase() === category.toLowerCase(),
+      (post) =>
+        post?.category?.toLowerCase() === (category ?? '').toLowerCase(),
     ),
   }))
 

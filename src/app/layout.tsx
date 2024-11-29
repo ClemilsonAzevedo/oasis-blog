@@ -36,7 +36,6 @@ export const metadata: Metadata = {
     'web apps',
   ],
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1.0',
   openGraph: {
     title: 'Oasis Blog | Tudo sobre Desenvolvimento Web',
     description:
