@@ -1,0 +1,160 @@
+---
+postTitle: Como deve fazer os seus commits
+category: "commits"
+poster: {
+  name: 'Clemilson Azevedo',
+  imageUrl: 'https://github.com/clemilsonazevedo.png'
+}
+publishDate: 2024-11-29T11:00:00Z
+---
+
+import { PostHeader } from '../../_components/PostHeader'
+
+<PostHeader
+  title="Como deve fazer os seus commits"
+  category="tecnologia"
+  publishDate="2024-09-20T11:00:00Z"
+  poster={{
+    name: 'Clemilson Azevedo',
+    imageUrl: 'https://github.com/clemilsonazevedo.png'
+  }}
+/>
+
+{/* <div className="space-y-5">
+  <div className='space-y-4'>
+    <div>
+      <span className='px-3 py-[6px] rounded-[6px] bg-blogYellow text-blogWhite text-sm font-medium leading-5'>Tecnologia</span>
+    </div>
+    # Como deve fazer os seus commits 
+  </div>
+  <div className="flex items-center gap-1 not-prose text-zinc-500 text-sm">
+    <div className='flex items-center gap-2'>
+      <Image src={'https://github.com/clemilsonazevedo.png'} width={28} height={28} className='rounded-full' />
+      <div className='flex items-center gap-6'>
+        ######  Tracey Wilson
+        <time style={{ fontFamily: 'Work Sans, sans-serif', fontSize: '14px' }}>
+          {new Date("2024-07-24T11:00:00Z").toLocaleDateString('pt-BR', {
+            dateStyle: 'medium',
+          })}
+        </time>
+      </div>
+    </div>
+  </div>
+</div> */}
+
+[Como fazer um bom commit](https://medium.com/gitconnected/good-commit-vs-your-commit-how-to-write-a-perfect-git-commit-message-6e96ab6357fa)
+
+## Regras de Convencional Commits
+
+### 1. **feat**: 
+   - **Propósito**: Indica a **adição de uma nova funcionalidade** ao código.
+   - **Impacto**: Pode afetar o versionamento, normalmente incrementando a versão _minor_ (ex: `1.1.0` para `1.2.0`).
+   - **Exemplo**:
+``` fish
+ feat(auth): add login feature
+```
+
+### 2. **fix**: 
+   - **Propósito**: Refere-se a uma **correção de bug**.
+   - **Impacto**: Pode afetar o versionamento, incrementando a versão _patch_ (ex: `1.0.1` para `1.0.2`).
+   - **Exemplo**:
+     ```
+     fix(ui): correct button alignment
+     ```
+
+### 3. **chore**: 
+   - **Propósito**: Usado para mudanças no **fluxo de desenvolvimento** ou **tarefa administrativa** que não afetam o código de produção, como atualizações de dependências ou ajustes na configuração do build.
+   - **Impacto**: Não afeta a versão.
+   - **Exemplo**:
+     ```
+     chore(deps): update react version to 17.0.2
+     ```
+
+### 4. **docs**: 
+   - **Propósito**: Usado para alterações na **documentação**, como arquivos README ou comentários no código.
+   - **Impacto**: Não afeta o código de produção.
+   - **Exemplo**:
+     ```
+     docs(readme): update installation instructions
+     ```
+
+### 5. **style**: 
+   - **Propósito**: Refere-se a mudanças **estéticas** no código, como correção de indentação, espaços em branco ou formatação, que **não afetam a lógica**.
+   - **Impacto**: Não altera a funcionalidade do código.
+   - **Exemplo**:
+     ```
+     style(css): improve button padding
+     ```
+
+### 6. **refactor**: 
+   - **Propósito**: Modificações no **código que melhoram a estrutura interna** sem alterar o comportamento ou funcionalidade.
+   - **Impacto**: Normalmente utilizado para otimizações ou melhorias.
+   - **Exemplo**:
+     ```
+     refactor(auth): simplify login logic
+     ```
+
+### 7. **perf**: 
+   - **Propósito**: Usado para alterações que **melhoram o desempenho** do código.
+   - **Impacto**: Pode aumentar a eficiência, mas não altera funcionalidades.
+   - **Exemplo**:
+     ```
+     perf(api): improve response time on login endpoint
+     ```
+
+### 8. **test**: 
+   - **Propósito**: Refere-se a **adições ou ajustes em testes** automatizados, como testes unitários ou de integração.
+   - **Impacto**: Não afeta a produção, apenas a cobertura de testes.
+   - **Exemplo**:
+     ```
+     test(login): add unit tests for login component
+     ```
+
+### 9. **build**: 
+   - **Propósito**: Usado para mudanças que afetam o **sistema de build ou dependências externas**, como atualizações de ferramentas de build (ex: Webpack, Babel).
+   - **Impacto**: Não altera o comportamento do código em produção diretamente.
+   - **Exemplo**:
+     ```
+     build(webpack): update webpack config for production
+     ```
+
+### 10. **ci**: 
+   - **Propósito**: Refere-se a mudanças nos **scripts de integração contínua** (CI), como ajustes no Jenkins, GitHub Actions, ou Travis.
+   - **Impacto**: Não afeta o código de produção.
+   - **Exemplo**:
+     ```
+     ci(travis): update node versions in CI pipeline
+     ```
+
+### 11. **revert**: 
+   - **Propósito**: Indica que você está **revertendo um commit anterior**.
+   - **Impacto**: Desfaz mudanças introduzidas anteriormente.
+   - **Exemplo**:
+     ```
+     revert: feat(auth): add login feature
+     ```
+
+### 12. **ci**: 
+   - **Propósito**: Alterações no **fluxo de integração contínua**, como atualizações de scripts de deploy ou mudanças na configuração do pipeline.
+   - **Impacto**: Não afeta o código diretamente.
+   - **Exemplo**:
+     ```
+     ci(circleci): update deployment pipeline config
+     ```
+
+### 13. **build**: 
+   - **Propósito**: Refere-se a mudanças que afetam o sistema de **build** (compilação), como adicionar dependências ou alterar scripts relacionados ao processo de build.
+   - **Exemplo**:
+     ```
+     build: add script for automatic versioning
+     ```
+
+### 14. **BREAKING CHANGE**:
+   - **Propósito**: Quando uma mudança causa uma **incompatibilidade com versões anteriores**, ela deve ser marcada como uma "breaking change". Isso pode ser incluído em commits do tipo `feat` ou `fix`.
+   - **Impacto**: Afeta o versionamento seguindo o modelo SemVer, onde há um incremento na versão major.
+   - **Exemplo**:
+     ```
+     feat(auth): refactor login flow
+
+     BREAKING CHANGE: login API now requires email instead of username
+     ```

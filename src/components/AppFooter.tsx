@@ -1,12 +1,10 @@
-import Image from 'next/image'
-
-import { AppButton } from './AppButton'
-
 import MailBox from '@/app/assets/MailBox.png'
 import OasisLogo from '@/app/assets/OasisLogo.svg'
 import { InstagramIcon } from '@/app/assets/icons/InstagramIcon'
 import { LinkedinIcon } from '@/app/assets/icons/LinkedinIcon'
 import { TwitterIcon } from '@/app/assets/icons/TwitterIcon'
+import Image from 'next/image'
+import { NewsletterInput } from './NewsletterInput'
 
 export function AppFooter() {
   return (
@@ -22,14 +20,7 @@ export function AppFooter() {
               Subscribe to newsletter and never miss the new post every week.
             </p>
           </div>
-          <div className="flex items-center gap-2 md:gap-5">
-            <input
-              type="text"
-              placeholder="Digite seu e-mail aqui...."
-              className="bg-blogWhite rounded-lg md:text-xl py-5 px-6 leading-none placeholder:text-blogGray border-2 border-blogGray"
-            />
-            <AppButton className="py-5 px-6">Inscrever-se</AppButton>
-          </div>
+          <NewsletterInput />
         </div>
       </section>
       <section className="bg-blogLightGray200 py-14 px-24 ">

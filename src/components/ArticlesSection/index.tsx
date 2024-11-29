@@ -17,7 +17,7 @@ export function ArticlesSection({
           sectionRedirectLink,
         }}
       />
-      <div className="flex flex-col md:flex-row md:justify-start items-center gap-9">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center items-center w-full flex-wrap gap-9">
         {post?.map((post) => (
           <SectionPost
             key={post.postTitle}
