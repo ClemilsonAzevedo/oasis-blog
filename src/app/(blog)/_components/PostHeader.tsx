@@ -10,6 +10,7 @@ type PostHeaderProps = {
   }
 }
 
+// Componente para exibir o cabeçalho de um post
 export function PostHeader({
   title,
   category,
@@ -20,6 +21,7 @@ export function PostHeader({
     <div className="space-y-5">
       <div className="space-y-4">
         <div>
+          {/* Exibe a categoria do post */}
           <span className="px-3 py-[6px] rounded-[6px] bg-blogYellow text-blogWhite text-sm font-medium leading-5">
             {category}
           </span>
@@ -28,6 +30,7 @@ export function PostHeader({
       </div>
       <div className="flex items-center gap-1 not-prose text-zinc-500 text-sm">
         <div className="flex items-center gap-2">
+          {/* Exibe a imagem e informações do autor */}
           <Image
             src={poster.imageUrl}
             width={28}
@@ -43,6 +46,7 @@ export function PostHeader({
                 fontSize: '14px',
               }}
             >
+              {/* Exibe a data de publicação formatada */}
               {new Date(`${publishDate}`).toLocaleDateString('pt-BR', {
                 dateStyle: 'medium',
               })}
